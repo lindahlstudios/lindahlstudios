@@ -97,8 +97,8 @@ const projects = [
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, i) => {
-        // LinkDR: free screenshot API, no key required
-        const screenshotSrc = `https://linkdr.com/api/screenshot/${project.domain}`;
+        // Microlink: free screenshot API, no key required, CDN-cached after first request
+        const screenshotSrc = `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
         // Local logo path — drop files in public/images/logos/ to activate
         const localLogoSrc = `/images/logos/${project.logoFile}`;
         const clearbitLogoSrc = `https://logo.clearbit.com/${project.domain}`;
@@ -122,7 +122,7 @@ const projects = [
                   src={screenshotSrc}
                   alt={`${project.client} website screenshot`}
                   class="w-full h-full object-cover object-top"
-                  loading="lazy"
+                  loading="eager"
                 />
               </div>
 
