@@ -17,6 +17,7 @@ const services = [
     title: 'Ongoing Retainers',
     body: 'We do our best work with brands we know deeply. Retainer partnerships let us stay embedded in your business and ship improvements continuously.',
     startingAt: '$2,000',
+    fomo: true,
   },
 ];
 ---
@@ -42,11 +43,18 @@ const services = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {services.map((service, i) => (
         <div
-          class="border border-gray-200 border-t-2 border-t-forest rounded-xl p-7 bg-white"
+          class="border border-gray-200 border-t-2 border-t-forest rounded-xl p-7 bg-white relative overflow-hidden"
           data-sal="fade-up"
           data-sal-duration="500"
           data-sal-delay={String(i * 100)}
         >
+          {service.fomo && (
+            <div class="mb-3">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold bg-forest-pale text-forest border border-forest/20 rounded-full px-3 py-1">
+                2/3 spots filled
+              </span>
+            </div>
+          )}
           <h3 class="text-base font-bold mb-2">{service.title}</h3>
           <p class="text-sm leading-relaxed text-gray-600">{service.body}</p>
           {service.startingAt && (

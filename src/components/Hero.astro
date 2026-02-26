@@ -1,13 +1,27 @@
 ---
-
+const now = new Date();
+const bookingDate = new Date(now.getFullYear(), now.getMonth() + 2, 1);
+const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
 ---
 
 <section class="bg-cream">
   <div class="max-w-site mx-auto px-6 md:px-12 py-20 md:py-28">
+    <div
+      class="mb-5"
+      data-sal="fade-up"
+      data-sal-duration="500"
+    >
+      <span class="inline-flex items-center gap-2 bg-forest-pale text-forest text-[12px] font-semibold tracking-wide px-3.5 py-1.5 rounded-full border border-forest/20">
+        <span class="w-1.5 h-1.5 rounded-full bg-forest animate-pulse inline-block flex-shrink-0"></span>
+        Now Booking {bookingMonth}
+      </span>
+    </div>
+
     <p
       class="text-[13px] font-semibold text-forest tracking-wide mb-6"
       data-sal="fade-up"
       data-sal-duration="500"
+      data-sal-delay="50"
     >
       Boutique Shopify Development Studio · US-Based
     </p>
