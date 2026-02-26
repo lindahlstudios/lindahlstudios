@@ -107,7 +107,7 @@ const projects = [
             : `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
         // Local logo path — drop files in public/images/logos/ to activate
         const localLogoSrc = `/images/logos/${project.logoFile}`;
-        const clearbitLogoSrc = `https://logo.clearbit.com/${project.domain}`;
+        // Clearbit logo API was shut down Dec 2025 — removed from fallback chain
 
         // If no URL, render as a plain div (no broken outbound link)
         const Tag = project.url ? 'a' : 'div';
@@ -145,7 +145,7 @@ const projects = [
                   alt={`${project.client} logo`}
                   class="max-w-[160px] max-h-[64px] w-auto object-contain"
                   loading="lazy"
-                  onerror={`this.onerror=null; this.src='${clearbitLogoSrc}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}`}
+                  onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"
                 />
                 {/* Final fallback: client name as text */}
                 <span class="font-serif text-xl text-forest/40 hidden">
