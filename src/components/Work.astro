@@ -43,10 +43,10 @@ const projects = [
       'Built Product Tag feature',
       'Various bugfixes',
     ],
-    // Site is no longer live — using archived screenshot, no outbound link
+    // Site is no longer live — no screenshot available, logo-only card
     domain: 'tourparavel.com',
     logoFile: 'paravel.png',
-    screenshotFile: 'paravel.jpg',
+    noScreenshot: true,
   },
   {
     client: 'Rainier Watch',
@@ -100,9 +100,11 @@ const projects = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, i) => {
         // Use a local static screenshot if provided, otherwise hit the Microlink API
-        const screenshotSrc = project.screenshotFile
-          ? `/images/screenshots/${project.screenshotFile}`
-          : `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
+        const screenshotSrc = project.noScreenshot
+          ? null
+          : project.screenshotFile
+            ? `/images/screenshots/${project.screenshotFile}`
+            : `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
         // Local logo path — drop files in public/images/logos/ to activate
         const localLogoSrc = `/images/logos/${project.logoFile}`;
         const clearbitLogoSrc = `https://logo.clearbit.com/${project.domain}`;
@@ -124,18 +126,20 @@ const projects = [
             {/* Visual header: logo by default, screenshot on hover */}
             <div class="aspect-[16/10] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
 
-              {/* Screenshot layer — loads behind, reveals on hover */}
-              <div class="absolute inset-0 z-0">
-                <img
-                  src={screenshotSrc}
-                  alt={`${project.client} website screenshot`}
-                  class="w-full h-full object-cover object-top"
-                  loading="eager"
-                />
-              </div>
+              {/* Screenshot layer — loads behind, reveals on hover (skipped if noScreenshot) */}
+              {screenshotSrc && (
+                <div class="absolute inset-0 z-0">
+                  <img
+                    src={screenshotSrc}
+                    alt={`${project.client} website screenshot`}
+                    class="w-full h-full object-cover object-top"
+                    loading="eager"
+                  />
+                </div>
+              )}
 
-              {/* Logo layer — sits on top, fades out on hover */}
-              <div class="absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-300 group-hover:opacity-0 bg-gradient-to-br from-gray-50 to-gray-100">
+              {/* Logo layer — fades out on hover unless noScreenshot, then stays put */}
+              <div class={`absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-br from-gray-50 to-gray-100 ${screenshotSrc ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`}>
                 <img
                   src={localLogoSrc}
                   alt={`${project.client} logo`}
