@@ -1,5 +1,21 @@
-.DS_Store
+# dependencies
+node_modules/
 
-rellax-build.js
-npm-debug.log
-bootstrap.min.css
+# build
+dist/
+.astro/
+
+# environment
+.env
+.env.production
+.env.local
+
+# editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# os
+.DS_Store
+Thumbs.db
