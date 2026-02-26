@@ -9,6 +9,8 @@ const projects = [
       'Built custom metaobject features',
     ],
     url: 'https://aviatornationride.com',
+    domain: 'aviatornationride.com',
+    logoFile: 'aviator-nation-ride.svg',
   },
   {
     client: 'Aviator Nation',
@@ -19,6 +21,8 @@ const projects = [
       'Implemented CRO and UI improvements',
     ],
     url: 'https://aviatornation.com',
+    domain: 'aviatornation.com',
+    logoFile: 'aviator-nation.png',
   },
   {
     client: 'Sunday Golf',
@@ -28,6 +32,8 @@ const projects = [
       'UX and CRO improvements',
     ],
     url: 'https://sundaygolf.com',
+    domain: 'sundaygolf.com',
+    logoFile: 'sunday-golf.avif',
   },
   {
     client: 'Paravel',
@@ -38,6 +44,8 @@ const projects = [
       'Various bugfixes',
     ],
     url: 'https://tourparavel.com',
+    domain: 'tourparavel.com',
+    logoFile: 'paravel.png',
   },
   {
     client: 'Rainier Watch',
@@ -48,6 +56,8 @@ const projects = [
       'Customized Shopify Theme',
     ],
     url: 'https://shop.rainierwatch.com',
+    domain: 'rainierwatch.com',
+    logoFile: 'rainier-watch.avif',
   },
   {
     client: 'Revolution Fibers',
@@ -57,6 +67,8 @@ const projects = [
       'Improved UX and conversions',
     ],
     url: 'https://x.com/austriker27/status/1757889669231255935',
+    domain: 'revolutionfibers.com',
+    logoFile: 'revolution-fibers.avif',
   },
   {
     client: 'South Sound Proud',
@@ -67,6 +79,8 @@ const projects = [
       'Implemented CRO features',
     ],
     url: 'https://shop.southsoundproud.org',
+    domain: 'southsoundproud.org',
+    logoFile: 'south-sound-proud.svg',
   },
 ];
 ---
@@ -82,45 +96,74 @@ const projects = [
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map((project, i) => (
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
-          data-sal="fade-up"
-          data-sal-duration="500"
-          data-sal-delay={String(i * 100)}
-        >
-          {/* Visual header — replace with screenshots when available */}
-          <div class="aspect-[16/10] bg-gradient-to-br from-forest-pale to-cream relative overflow-hidden">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="font-serif text-xl text-forest/40 group-hover:text-forest/60 transition-colors">
-                {project.client}
-              </span>
-            </div>
-          </div>
+      {projects.map((project, i) => {
+        // LinkDR: free screenshot API, no key required
+        const screenshotSrc = `https://linkdr.com/api/screenshot/${project.domain}`;
+        // Local logo path — drop files in public/images/logos/ to activate
+        const localLogoSrc = `/images/logos/${project.logoFile}`;
+        const clearbitLogoSrc = `https://logo.clearbit.com/${project.domain}`;
 
-          <div class="p-6">
-            <h3 class="text-base font-bold mb-1 group-hover:text-forest transition-colors">
-              {project.client}
-            </h3>
-            <p class="text-sm text-gray-400 mb-3">{project.type}</p>
-            <ul class="space-y-1">
-              {project.work.map((item) => (
-                <li class="text-sm text-gray-600 flex items-start gap-2">
-                  <span class="text-forest/50 mt-1.5 flex-shrink-0">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 12 12">
-                      <circle cx="6" cy="6" r="2" />
-                    </svg>
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </a>
-      ))}
+        return (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
+            data-sal="fade-up"
+            data-sal-duration="500"
+            data-sal-delay={String(i * 100)}
+          >
+            {/* Visual header: logo by default, screenshot on hover */}
+            <div class="aspect-[16/10] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+
+              {/* Screenshot layer — loads behind, reveals on hover */}
+              <div class="absolute inset-0 z-0">
+                <img
+                  src={screenshotSrc}
+                  alt={`${project.client} website screenshot`}
+                  class="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Logo layer — sits on top, fades out on hover */}
+              <div class="absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-300 group-hover:opacity-0 bg-gradient-to-br from-gray-50 to-gray-100">
+                <img
+                  src={localLogoSrc}
+                  alt={`${project.client} logo`}
+                  class="max-w-[160px] max-h-[64px] w-auto object-contain"
+                  loading="lazy"
+                  onerror={`this.onerror=null; this.src='${clearbitLogoSrc}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}`}
+                />
+                {/* Final fallback: client name as text */}
+                <span class="font-serif text-xl text-forest/40 hidden">
+                  {project.client}
+                </span>
+              </div>
+
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-base font-bold mb-1 group-hover:text-forest transition-colors">
+                {project.client}
+              </h3>
+              <p class="text-sm text-gray-400 mb-3">{project.type}</p>
+              <ul class="space-y-1">
+                {project.work.map((item) => (
+                  <li class="text-sm text-gray-600 flex items-start gap-2">
+                    <span class="text-forest/50 mt-1.5 flex-shrink-0">
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 12 12">
+                        <circle cx="6" cy="6" r="2" />
+                      </svg>
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>
