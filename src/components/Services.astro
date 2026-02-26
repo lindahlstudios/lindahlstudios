@@ -1,0 +1,54 @@
+---
+const services = [
+  {
+    title: 'Custom Theme Development',
+    body: 'Full builds and redesigns on Shopify and Shopify Plus. Clean, performant Liquid code built to last and easy to maintain long after launch.',
+  },
+  {
+    title: 'CRO-Focused UI/UX',
+    body: "Conversion-focused design and UX improvements backed by more than a decade of UI/UX experience and an operator's understanding of what actually moves customers to buy.",
+  },
+  {
+    title: 'Ecommerce Strategy & Consulting',
+    body: "High-level thinking on your store architecture, app stack, and growth levers. Not just what to build — what to build first and why it matters for your bottom line.",
+  },
+  {
+    title: 'Ongoing Retainers',
+    body: 'We do our best work with brands we know deeply. Retainer partnerships let us stay embedded in your business and ship improvements continuously.',
+  },
+];
+---
+
+<section id="services" class="bg-white">
+  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
+    <h2
+      class="font-serif text-3xl md:text-4xl mb-2"
+      data-sal="fade-up"
+      data-sal-duration="500"
+    >
+      What we do
+    </h2>
+    <p
+      class="text-[15px] text-gray-400 mb-10"
+      data-sal="fade-up"
+      data-sal-duration="500"
+      data-sal-delay="100"
+    >
+      Not everything — just the things we're great at.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {services.map((service, i) => (
+        <div
+          class="border border-gray-200 border-t-2 border-t-forest rounded-xl p-7 bg-white"
+          data-sal="fade-up"
+          data-sal-duration="500"
+          data-sal-delay={String(i * 100)}
+        >
+          <h3 class="text-base font-bold mb-2">{service.title}</h3>
+          <p class="text-sm leading-relaxed text-gray-600">{service.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

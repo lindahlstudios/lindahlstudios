@@ -1,0 +1,116 @@
+---
+const projects = [
+  {
+    client: 'Aviator Nation',
+    type: 'Shopify Plus · CRO Implementation',
+    work: [
+      'Implemented CRO/Oddit Report',
+      'Enhanced UX/UI',
+      'Customized Rebuy Cart',
+    ],
+    url: 'https://aviatornation.com',
+  },
+  {
+    client: 'Sunday Golf',
+    type: 'Shopify · Theme Customization',
+    work: [
+      'Shopify Theme Customizations',
+      'UX and CRO improvements',
+    ],
+    url: 'https://sundaygolf.com',
+  },
+  {
+    client: 'Paravel',
+    type: 'Shopify · Custom Features',
+    work: [
+      'Shopify Theme Customizations',
+      'Built Product Tag feature',
+      'Various bugfixes',
+    ],
+    url: 'https://tourparavel.com',
+  },
+  {
+    client: 'Rainier Watch',
+    type: 'Shopify · Custom Development',
+    work: [
+      'Custom branded backorder feature',
+      'FOMO features (low stock indicator)',
+      'Customized Shopify Theme',
+    ],
+    url: 'https://shop.rainierwatch.com',
+  },
+  {
+    client: 'Revolution Fibers',
+    type: 'Shopify · UX Optimization',
+    work: [
+      'Built custom product variant selector',
+      'Improved UX and conversions',
+    ],
+    url: 'https://x.com/austriker27/status/1757889669231255935',
+  },
+  {
+    client: 'South Sound Proud',
+    type: 'Shopify · Full Build',
+    work: [
+      'Rapid Shopify storefront build',
+      'Customized theme to be on brand',
+      'Implemented CRO features',
+    ],
+    url: 'https://shop.southsoundproud.org',
+  },
+];
+---
+
+<section id="work" class="bg-gray-50">
+  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
+    <h2
+      class="font-serif text-3xl md:text-4xl mb-10"
+      data-sal="fade-up"
+      data-sal-duration="500"
+    >
+      Work
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project, i) => (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
+          data-sal="fade-up"
+          data-sal-duration="500"
+          data-sal-delay={String(i * 100)}
+        >
+          {/* Visual header — replace with screenshots when available */}
+          <div class="aspect-[16/10] bg-gradient-to-br from-forest-pale to-cream relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-serif text-xl text-forest/40 group-hover:text-forest/60 transition-colors">
+                {project.client}
+              </span>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <h3 class="text-base font-bold mb-1 group-hover:text-forest transition-colors">
+              {project.client}
+            </h3>
+            <p class="text-sm text-gray-400 mb-3">{project.type}</p>
+            <ul class="space-y-1">
+              {project.work.map((item) => (
+                <li class="text-sm text-gray-600 flex items-start gap-2">
+                  <span class="text-forest/50 mt-1.5 flex-shrink-0">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 12 12">
+                      <circle cx="6" cy="6" r="2" />
+                    </svg>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

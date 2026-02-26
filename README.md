@@ -1,47 +1,74 @@
-# Project Title
+# Lindahl Studios
 
-This is a one page website for our little two man website and app shop. We build and ship websites for our clients and wanted a site to show off what we've done, because what kind of website development agency doesn't have their own website? We design and develop solutions for our clients.
+Boutique Shopify development studio website. Built with Astro, Tailwind CSS 3.3, and sal.js.
 
-## Getting Started
+## Quick Start
 
-Uhm basically just go to our [site](https://lindahlstudios.com) to check it out! Simple and fun!
+```bash
+npm install
+npm run dev
+```
 
-### Prerequisites
+Open [http://localhost:4321](http://localhost:4321).
 
-A computer, live internet connection and probably a modern browser not named IE.
+## Deploy to Netlify
 
-### Design Influence
+Already deployed via Netlify. Push to `main` and it auto-builds.
 
-The site is heavily based rellax, a lightweight vanilla javascript parallax library, developed by [dixon and moe](dixonandmoe.com/rellax).
+- Netlify auto-detects Astro
+- Every push to `main` triggers a production deploy
+- PRs get automatic preview deploys
+- Forms are handled by [Netlify Forms](https://docs.netlify.com/forms/setup/) — the contact form has `data-netlify="true"` and a honeypot field
+- Form submissions appear in the Netlify dashboard under Forms
 
-## Built With
+## Project Structure
 
-* [Atom](http://www.atom.io/) - The web framework used
-* [Apple](https://apple.com/) - Computers used in development
-* [Rellax](https://rometools.github.io/rome/) - The parallax library used
-* [Bootstrap](https://getbootstrap.com) - Bootstrap CSS Framework
+```
+src/
+├── components/       # All page sections as Astro components
+│   ├── Nav.astro
+│   ├── Hero.astro
+│   ├── ClientLogos.astro
+│   ├── ValueProp.astro
+│   ├── Services.astro
+│   ├── Work.astro
+│   ├── FewerClients.astro
+│   ├── About.astro
+│   ├── Testimonials.astro
+│   ├── FooterCTA.astro
+│   └── Footer.astro
+├── layouts/
+│   └── BaseLayout.astro    # HTML shell, fonts, meta, sal.js, analytics
+├── pages/
+│   ├── index.astro         # Homepage — assembles all components
+│   ├── contact/
+│   │   ├── index.astro     # Contact form (Netlify Forms)
+│   │   └── success.astro   # Post-submission thank you page
+│   └── 404.astro           # Error page
+└── styles/
+    └── global.css          # Tailwind directives + base styles
+public/
+├── favicon.svg
+└── images/
+    ├── david-lindahl.jpg   # ← ADD: David's photo
+    ├── og-image.jpg        # ← ADD: Open Graph share image (1200x630)
+    └── shopify-plus-partner.svg
+```
 
+## TODO Before Launch
 
-## Contributing
+- [ ] Add David's photo → `public/images/david-lindahl.jpg`
+- [ ] Add OG image → `public/images/og-image.jpg` (1200x630px)
+- [ ] Add client screenshots to Work section cards (or keep gradient placeholders)
+- [ ] Replace Shopify Plus SVG with official badge
+- [ ] Update Fathom analytics site ID if needed
+- [ ] Set up custom domain (lindahlstudios.com) in Netlify
+- [ ] Replace client logo text with actual logo images when available
 
-Made a fork if you wish and submit a PR if you want to make any edits!
+## Brand System
 
-## Versioning
+- **Fonts:** Instrument Serif (headlines) + Plus Jakarta Sans (body)
+- **Colors:** Cream `#F5F0E8`, Charcoal `#1A1A1A`, Forest `#2D5F4A`
+- **Animations:** sal.js with `fade-up`, 500ms duration, staggered delays
 
-We use [Github](http://github.com/) for versioning.
-
-## Authors
-
-* **David Lindahl** - *Initial work* - [David](https://github.com/austriker27)
-* **Michael Lindahl** - *Initial work* - [Michael](https://github.com/michaellidahl)
-
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Of course big shout out to Dixon and Moe for their really neat rellax parallax library.
-* Honey Crisp apples, the constant fuel and energy for David.
-* etc
+See `tailwind.config.mjs` for the full color and font configuration.

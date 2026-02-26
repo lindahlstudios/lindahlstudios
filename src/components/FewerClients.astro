@@ -1,0 +1,67 @@
+---
+const cards = [
+  {
+    title: 'No outsourcing',
+    body: "Your code is written by experienced, US-based developers. Not farmed overseas and white-labeled back.",
+  },
+  {
+    title: 'Embedded, not transactional',
+    body: 'We learn your brand, your stack, your goals. The longer we work together, the more value we deliver.',
+  },
+  {
+    title: 'Strategy + execution',
+    body: 'Ecommerce consulting and development from the same team. No telephone game between strategist and dev.',
+  },
+];
+---
+
+<section class="bg-white">
+  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
+    <div class="bg-charcoal rounded-2xl px-8 py-14 md:px-14 md:py-16">
+      <h2
+        class="font-serif text-3xl md:text-[40px] leading-[1.15] text-cream mb-6"
+        data-sal="fade-up"
+        data-sal-duration="500"
+      >
+        Fewer clients. Better results.
+      </h2>
+
+      <p
+        class="text-[17px] leading-[1.8] text-white/55 max-w-[680px] mb-4"
+        data-sal="fade-up"
+        data-sal-duration="500"
+        data-sal-delay="100"
+      >
+        Most agencies spread thin across dozens of projects. You get a junior
+        dev, slow updates, and nobody who really understands your business. We do
+        the opposite.
+      </p>
+
+      <p
+        class="text-[17px] leading-[1.8] text-white/55 max-w-[680px] mb-10"
+        data-sal="fade-up"
+        data-sal-duration="500"
+        data-sal-delay="200"
+      >
+        We work with a small number of brands at a time — going deep rather than
+        wide. That means we understand your customers, your goals, and the
+        metrics that matter. Not just shipping tickets, but thinking about what
+        to build next and why.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {cards.map((card, i) => (
+          <div
+            class="bg-white/[0.04] border border-white/[0.08] rounded-xl p-7"
+            data-sal="fade-up"
+            data-sal-duration="500"
+            data-sal-delay={String(300 + i * 100)}
+          >
+            <h3 class="text-[15px] font-bold text-cream mb-2">{card.title}</h3>
+            <p class="text-sm leading-relaxed text-white/50">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

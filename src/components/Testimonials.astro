@@ -1,0 +1,81 @@
+---
+const featured = {
+  quote:
+    'Not only did he have the technical chops to make the developer changes required, David also suggested and implemented his own UX improvements. We\'ll definitely look to partner with David again in the future.',
+  name: 'Curtis Ulrich',
+  title: 'Director of eCommerce, Aviator Nation',
+};
+
+const secondary = [
+  {
+    quote:
+      "I really enjoyed working with David. I came to him with basically a couple screenshots and an idea in my head and he turned it into working Liquid in about 4 days flat. He's a great communicator and a pleasure to work with.",
+    name: 'Kaine Kornegay',
+    title: 'Co-Founder, Revolution Fibers',
+  },
+  {
+    quote:
+      "I'm really impressed with the work David did for us. He was incredibly detailed and communicative throughout the entire time we worked with him. What stood out most was his expertise — and he took the time to research and suggest strategies that would benefit us in the long run.",
+    name: 'Raf',
+    title: 'Marketing Manager, Sunday Golf',
+  },
+  {
+    quote:
+      "Working with David was an enjoyable and collaborative experience and the product he delivered met all of my expectations. To this day I continue to partner with David on projects. I 10/10 would recommend!",
+    name: 'Amanda P',
+    title: 'Art Director, good culture',
+  },
+  {
+    quote:
+      "David demonstrated a deep understanding of our requirements and goals. His ability to anticipate potential challenges and proactively address them exceeded our expectations.",
+    name: 'Chris Lang',
+    title: 'Fresh Chile',
+  },
+];
+---
+
+<section id="testimonials" class="bg-white">
+  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
+    <h2
+      class="font-serif text-3xl md:text-4xl mb-10"
+      data-sal="fade-up"
+      data-sal-duration="500"
+    >
+      Words from clients
+    </h2>
+
+    <!-- Featured testimonial -->
+    <div
+      class="border border-gray-200 rounded-2xl p-8 md:p-12 bg-white mb-8"
+      data-sal="fade-up"
+      data-sal-duration="500"
+    >
+      <blockquote class="font-serif text-xl md:text-2xl leading-relaxed text-charcoal mb-6">
+        "{featured.quote}"
+      </blockquote>
+      <cite class="text-sm not-italic text-gray-500">
+        <strong class="text-charcoal">{featured.name}</strong>, {featured.title}
+      </cite>
+    </div>
+
+    <!-- Secondary testimonials -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {secondary.map((testimonial, i) => (
+        <div
+          class="border border-gray-200 rounded-xl p-6 bg-white"
+          data-sal="fade-up"
+          data-sal-duration="500"
+          data-sal-delay={String(i * 100)}
+        >
+          <blockquote class="text-sm leading-relaxed text-gray-600 italic mb-4">
+            "{testimonial.quote}"
+          </blockquote>
+          <cite class="text-xs not-italic text-gray-400">
+            <strong class="text-charcoal font-semibold">{testimonial.name}</strong>,{' '}
+            {testimonial.title}
+          </cite>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
