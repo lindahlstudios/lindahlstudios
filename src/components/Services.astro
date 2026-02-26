@@ -3,6 +3,7 @@ const services = [
   {
     title: 'Custom Theme Development',
     body: 'Full builds and redesigns on Shopify and Shopify Plus. Clean, performant Liquid code built to last and easy to maintain long after launch.',
+    startingAt: '$5,000',
   },
   {
     title: 'CRO-Focused UI/UX',
@@ -15,6 +16,7 @@ const services = [
   {
     title: 'Ongoing Retainers',
     body: 'We do our best work with brands we know deeply. Retainer partnerships let us stay embedded in your business and ship improvements continuously.',
+    startingAt: '$2,000',
   },
 ];
 ---
@@ -47,6 +49,9 @@ const services = [
         >
           <h3 class="text-base font-bold mb-2">{service.title}</h3>
           <p class="text-sm leading-relaxed text-gray-600">{service.body}</p>
+          {service.startingAt && (
+            <p class="text-sm font-medium text-forest mt-3">Starting at {service.startingAt}</p>
+          )}
         </div>
       ))}
     </div>
