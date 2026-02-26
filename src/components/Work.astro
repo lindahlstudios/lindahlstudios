@@ -43,9 +43,10 @@ const projects = [
       'Built Product Tag feature',
       'Various bugfixes',
     ],
-    url: 'https://tourparavel.com',
+    // Site is no longer live — using archived screenshot, no outbound link
     domain: 'tourparavel.com',
     logoFile: 'paravel.png',
+    screenshotFile: 'paravel.jpg',
   },
   {
     client: 'Rainier Watch',
@@ -97,17 +98,23 @@ const projects = [
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, i) => {
-        // Microlink: free screenshot API, no key required, CDN-cached after first request
-        const screenshotSrc = `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
+        // Use a local static screenshot if provided, otherwise hit the Microlink API
+        const screenshotSrc = project.screenshotFile
+          ? `/images/screenshots/${project.screenshotFile}`
+          : `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
         // Local logo path — drop files in public/images/logos/ to activate
         const localLogoSrc = `/images/logos/${project.logoFile}`;
         const clearbitLogoSrc = `https://logo.clearbit.com/${project.domain}`;
 
+        // If no URL, render as a plain div (no broken outbound link)
+        const Tag = project.url ? 'a' : 'div';
+        const linkProps = project.url
+          ? { href: project.url, target: '_blank', rel: 'noopener noreferrer' }
+          : {};
+
         return (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Tag
+            {...linkProps}
             class="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
             data-sal="fade-up"
             data-sal-duration="500"
@@ -144,9 +151,16 @@ const projects = [
             </div>
 
             <div class="p-6">
-              <h3 class="text-base font-bold mb-1 group-hover:text-forest transition-colors">
-                {project.client}
-              </h3>
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="text-base font-bold group-hover:text-forest transition-colors">
+                  {project.client}
+                </h3>
+                {!project.url && (
+                  <span class="text-[10px] font-medium text-gray-400 border border-gray-200 rounded-full px-2 py-0.5 flex-shrink-0 mt-0.5">
+                    Archived
+                  </span>
+                )}
+              </div>
               <p class="text-sm text-gray-400 mb-3">{project.type}</p>
               <ul class="space-y-1">
                 {project.work.map((item) => (
@@ -161,7 +175,7 @@ const projects = [
                 ))}
               </ul>
             </div>
-          </a>
+          </Tag>
         );
       })}
     </div>
