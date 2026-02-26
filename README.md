@@ -57,12 +57,12 @@ public/
 
 ## TODO Before Launch
 
-- [ ] Add David's photo → `public/images/david-lindahl.jpg`
-- [ ] Add OG image → `public/images/og-image.jpg` (1200x630px)
+- [x] Add David's photo → `public/images/david-lindahl.jpg`
+- [x] Add OG image → `public/images/og-image.jpg` (1200x630px)
 - [ ] Add client screenshots to Work section cards (or keep gradient placeholders)
-- [ ] Replace Shopify Plus SVG with official badge
-- [ ] Update Fathom analytics site ID if needed
-- [ ] Set up custom domain (lindahlstudios.com) in Netlify
+- [x] Replace Shopify Plus SVG with official badge
+- [x] Update Fathom analytics site ID if needed
+- [x] Set up custom domain (lindahlstudios.com) in Netlify
 - [ ] Replace client logo text with actual logo images when available
 
 ## Brand System
