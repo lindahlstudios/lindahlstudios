@@ -46,6 +46,8 @@ const description = 'Get in touch about your Shopify project. Custom development
           x-on:submit.prevent="submit()"
           novalidate
         >
+          <!-- Required for Netlify to identify the form on JS-submitted POSTs -->
+          <input type="hidden" name="form-name" value="contact" />
           <!-- Honeypot for spam -->
           <p class="hidden">
             <label>Don't fill this out: <input name="bot-field" /></label>
