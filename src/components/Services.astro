@@ -4,20 +4,27 @@ const services = [
     title: 'Custom Theme Development',
     body: 'Full builds and redesigns on Shopify and Shopify Plus. Clean, performant Liquid code built to last and easy to maintain long after launch.',
     startingAt: '$5,000',
+    pricingNote: 'For a simple 5-page build with design in hand. Typical full build: $15–20k.',
   },
   {
     title: 'CRO-Focused UI/UX',
-    body: "Conversion-focused design and UX improvements backed by more than a decade of UI/UX experience and an operator's understanding of what actually moves customers to buy.",
+    body: "Conversion-focused UX improvements worked in Figma and in code — improving and extending your existing brand rather than rebuilding from scratch. From page-level redesigns to component-level CRO, backed by more than a decade of UI/UX experience and an operator's eye for what actually moves customers to buy.",
   },
   {
     title: 'Ecommerce Strategy & Consulting',
-    body: "High-level thinking on your store architecture, app stack, and growth levers. Not just what to build — what to build first and why it matters for your bottom line.",
+    body: "Strategy backed by real skin in the game: we've grown our own bootstrapped brand from $0 to six figures on Shopify. High-level thinking on your architecture, app stack, and growth levers — thinking in contribution margin and CAC payback, not just top-line revenue. Not just what to build, but what to build first and why it matters for your bottom line.",
   },
   {
     title: 'Ongoing Retainers',
     body: 'We do our best work with brands we know deeply. Retainer partnerships let us stay embedded in your business and ship improvements continuously.',
     startingAt: '$2,000',
-    fomo: true,
+    badge: '2/3 spots filled',
+  },
+  {
+    title: 'AI for Your Business',
+    body: "AI isn't just how we build — it's something we bring directly into your business. Whether that means teaching your team to work faster with AI tools, building custom Claude skills and plugins that automate your workflows, or adding AI-native features to your store, we help you get real leverage from it. Platform-agnostic: we lead with Claude but work with whatever fits your stack. Faster development timelines come with the territory — this studio's own site was built entirely with AI-assisted tools.",
+    badge: 'New',
+    wide: true,
   },
 ];
 ---
@@ -43,22 +50,30 @@ const services = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {services.map((service, i) => (
         <div
-          class="border border-gray-200 border-t-2 border-t-forest rounded-xl p-7 bg-white relative overflow-hidden"
+          class:list={[
+            'border border-gray-200 border-t-2 border-t-forest rounded-xl p-7 bg-white relative overflow-hidden',
+            service.wide && 'md:col-span-2',
+          ]}
           data-sal="fade-up"
           data-sal-duration="500"
           data-sal-delay={String(i * 100)}
         >
-          {service.fomo && (
+          {service.badge && (
             <div class="mb-3">
               <span class="inline-flex items-center gap-1.5 text-xs font-semibold bg-forest-pale text-forest border border-forest/20 rounded-full px-3 py-1">
-                2/3 spots filled
+                {service.badge}
               </span>
             </div>
           )}
           <h3 class="text-base font-bold mb-2">{service.title}</h3>
           <p class="text-sm leading-relaxed text-gray-600">{service.body}</p>
           {service.startingAt && (
-            <p class="text-sm font-medium text-forest mt-3">Starting at {service.startingAt}</p>
+            <div class="mt-3">
+              <p class="text-sm font-medium text-forest">Starting at {service.startingAt}</p>
+              {service.pricingNote && (
+                <p class="text-xs text-gray-400 mt-0.5">{service.pricingNote}</p>
+              )}
+            </div>
           )}
         </div>
       ))}
