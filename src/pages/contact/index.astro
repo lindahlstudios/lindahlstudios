@@ -27,9 +27,8 @@ const description = 'Get in touch about your Shopify project. Custom development
           data-sal-duration="500"
           data-sal-delay="100"
         >
-          Fill out the form below with some details about your project. It helps
-          to include your Shopify URL, budget range, goals, and target timeframe.
-          I'll get back to you within one business day.
+          Fill out the form below with some details about your project. I'll get
+          back to you within one business day.
         </p>
 
         <form
@@ -48,6 +47,9 @@ const description = 'Get in touch about your Shopify project. Custom development
         >
           <!-- Required for Netlify to identify the form on JS-submitted POSTs -->
           <input type="hidden" name="form-name" value="contact" />
+          <!-- Hidden inputs for project type and scope -->
+          <input type="hidden" name="project_type" x-bind:value="projectType" />
+          <input type="hidden" name="scope" x-bind:value="scope" />
           <!-- Honeypot for spam -->
           <p class="hidden">
             <label>Don't fill this out: <input name="bot-field" /></label>
@@ -89,6 +91,58 @@ const description = 'Get in touch about your Shopify project. Custom development
             </div>
           </div>
 
+          <!-- Project Type -->
+          <div>
+            <label class="block text-sm font-medium text-charcoal mb-2">Project Type</label>
+            <div class="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                @click="projectType = 'one-off'; scope = ''"
+                :class="projectType === 'one-off' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+              >
+                One-off project
+              </button>
+              <button
+                type="button"
+                @click="projectType = 'retainer'; scope = ''"
+                :class="projectType === 'retainer' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+              >
+                Ongoing retainer
+              </button>
+            </div>
+          </div>
+
+          <!-- Scope (one-off only) -->
+          <div x-show="projectType === 'one-off'" x-transition style="display:none">
+            <label class="block text-sm font-medium text-charcoal mb-2">Scope</label>
+            <div class="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                @click="scope = 'fresh-build'"
+                :class="scope === 'fresh-build' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+              >
+                Fresh build
+              </button>
+              <button
+                type="button"
+                @click="scope = 'maintenance'"
+                :class="scope === 'maintenance' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+              >
+                Maintenance & improvements
+              </button>
+            </div>
+            <p
+              x-show="scope"
+              x-text="scope === 'fresh-build' ? 'Fresh builds start at $5,000.' : 'Maintenance projects start at $1,000.'"
+              class="text-xs text-gray-400 mt-2"
+              style="display:none"
+            ></p>
+          </div>
+
           <div>
             <label for="shopify-url" class="block text-sm font-medium text-charcoal mb-2">
               Shopify Store URL <span class="text-gray-400 font-normal">(if applicable)</span>
@@ -118,6 +172,23 @@ const description = 'Get in touch about your Shopify project. Custom development
               <option value="20k-plus">$20,000+</option>
               <option value="retainer">Ongoing retainer</option>
               <option value="not-sure">Not sure yet</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="timeframe" class="block text-sm font-medium text-charcoal mb-2">
+              Target Timeframe <span class="text-gray-400 font-normal">(optional)</span>
+            </label>
+            <select
+              id="timeframe"
+              name="timeframe"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-charcoal text-sm focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+            >
+              <option value="" selected>Not sure yet</option>
+              <option value="asap">ASAP</option>
+              <option value="1-2-months">1–2 months</option>
+              <option value="3-6-months">3–6 months</option>
+              <option value="flexible">Flexible</option>
             </select>
           </div>
 
@@ -158,6 +229,8 @@ const description = 'Get in touch about your Shopify project. Custom development
     name: '',
     email: '',
     message: '',
+    projectType: '',
+    scope: '',
     errors: {} as Record<string, string>,
 
     validate() {
