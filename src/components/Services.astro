@@ -4,7 +4,10 @@ const services = [
     title: 'Custom Theme Development',
     body: 'Full builds and redesigns on Shopify and Shopify Plus. Clean, performant Liquid code built to last and easy to maintain long after launch.',
     startingAt: '$5,000',
-    pricingNote: 'For a simple 5-page build with design in hand. Typical full build: $15–20k.',
+    pricingNotes: [
+      'For a simple 5-page build with design in hand.',
+      'Typical full build: $15–30k.',
+    ],
   },
   {
     title: 'CRO-Focused UI/UX',
@@ -70,8 +73,12 @@ const services = [
           {service.startingAt && (
             <div class="mt-3">
               <p class="text-sm font-medium text-forest">Starting at {service.startingAt}</p>
-              {service.pricingNote && (
-                <p class="text-xs text-gray-400 mt-0.5">{service.pricingNote}</p>
+              {service.pricingNotes && (
+                <div class="mt-1 space-y-1">
+                  {service.pricingNotes.map(note => (
+                    <p class="text-xs text-gray-400">{note}</p>
+                  ))}
+                </div>
               )}
             </div>
           )}
