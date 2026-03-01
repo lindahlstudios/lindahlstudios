@@ -94,7 +94,7 @@ const description = 'Get in touch about your Shopify project. Custom development
           <!-- Project Type -->
           <div>
             <label class="block text-sm font-medium text-charcoal mb-2">Project Type</label>
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-3 gap-3">
               <button
                 type="button"
                 @click="projectType = 'one-off'; scope = ''"
@@ -110,6 +110,14 @@ const description = 'Get in touch about your Shopify project. Custom development
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
               >
                 Ongoing retainer
+              </button>
+              <button
+                type="button"
+                @click="projectType = 'other'; scope = ''"
+                :class="projectType === 'other' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+              >
+                Other
               </button>
             </div>
           </div>
