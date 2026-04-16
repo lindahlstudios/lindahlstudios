@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['"Gilda Display"', 'Georgia', 'serif'],
+        sans: ['Jost', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
         cream: '#F5F0E8',
