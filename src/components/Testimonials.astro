@@ -46,14 +46,14 @@ const secondary = [
 
     <!-- Featured testimonial -->
     <div
-      class="border border-gray-200 rounded-2xl p-8 md:p-12 bg-white mb-8"
+      class="border border-ui-border rounded-2xl p-8 md:p-12 bg-white mb-8"
       data-sal="fade-up"
       data-sal-duration="500"
     >
       <blockquote class="font-serif text-xl md:text-2xl leading-relaxed text-charcoal mb-6">
         "{featured.quote}"
       </blockquote>
-      <cite class="text-sm not-italic text-gray-500">
+      <cite class="text-sm not-italic text-ui-muted">
         <strong class="text-charcoal">{featured.name}</strong>, {featured.title}
       </cite>
     </div>
@@ -62,15 +62,15 @@ const secondary = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {secondary.map((testimonial, i) => (
         <div
-          class="border border-gray-200 rounded-xl p-6 bg-white"
+          class="border border-ui-border rounded-xl p-6 bg-white"
           data-sal="fade-up"
           data-sal-duration="500"
           data-sal-delay={String(i * 100)}
         >
-          <blockquote class="text-sm leading-relaxed text-gray-600 italic mb-4">
+          <blockquote class="text-sm leading-relaxed text-ui-body italic mb-4">
             "{testimonial.quote}"
           </blockquote>
-          <cite class="text-xs not-italic text-gray-400">
+          <cite class="text-xs not-italic text-ui-faint">
             <strong class="text-charcoal font-semibold">{testimonial.name}</strong>,{' '}
             {testimonial.title}
           </cite>

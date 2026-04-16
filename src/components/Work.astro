@@ -87,7 +87,7 @@ const projects = [
 ];
 ---
 
-<section id="work" class="bg-gray-50">
+<section id="work" class="bg-ui-subtle">
   <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
     <h2
       class="font-serif text-3xl md:text-4xl mb-10"
@@ -118,13 +118,13 @@ const projects = [
         return (
           <Tag
             {...linkProps}
-            class="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
+            class="group border border-ui-border rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
             data-sal="fade-up"
             data-sal-duration="500"
             data-sal-delay={String(i * 100)}
           >
             {/* Visual header: logo by default, screenshot on hover */}
-            <div class="aspect-[16/10] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+            <div class="aspect-[16/10] bg-gradient-to-br from-ui-subtle to-ui-placeholder relative overflow-hidden">
 
               {/* Screenshot layer — loads behind, reveals on hover (skipped if noScreenshot) */}
               {/* loading="eager" is intentional: screenshots must be ready before hover so the
@@ -142,7 +142,7 @@ const projects = [
               )}
 
               {/* Logo layer — fades out on hover unless noScreenshot, then stays put */}
-              <div class={`absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-br from-gray-50 to-gray-100 ${screenshotSrc ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`}>
+              <div class={`absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-br from-ui-subtle to-ui-placeholder ${screenshotSrc ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`}>
                 <img
                   src={localLogoSrc}
                   alt={`${project.client} logo`}
@@ -164,15 +164,15 @@ const projects = [
                   {project.client}
                 </h3>
                 {!project.url && (
-                  <span class="text-[10px] font-medium text-gray-400 border border-gray-200 rounded-full px-2 py-0.5 flex-shrink-0 mt-0.5">
+                  <span class="text-[10px] font-medium text-ui-faint border border-ui-border rounded-full px-2 py-0.5 flex-shrink-0 mt-0.5">
                     Archived
                   </span>
                 )}
               </div>
-              <p class="text-sm text-gray-400 mb-3">{project.type}</p>
+              <p class="text-sm text-ui-faint mb-3">{project.type}</p>
               <ul class="space-y-1">
                 {project.work.map((item) => (
-                  <li class="text-sm text-gray-600 flex items-start gap-2">
+                  <li class="text-sm text-ui-body flex items-start gap-2">
                     <span class="text-forest/50 mt-1.5 flex-shrink-0">
                       <svg class="w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 12 12">
                         <circle cx="6" cy="6" r="2" />
