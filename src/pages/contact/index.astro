@@ -66,12 +66,14 @@ const description = 'Get in touch about your Shopify project. Custom development
                 id="name"
                 name="name"
                 required
+                aria-required="true"
+                aria-describedby="name-error"
                 x-model="name"
                 :class="errors.name ? 'border-red-500' : 'border-gray-300'"
                 class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
                 placeholder="Your name"
               />
-              <p x-show="errors.name" x-text="errors.name" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
+              <p id="name-error" x-show="errors.name" x-text="errors.name" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
             </div>
 
             <div>
@@ -83,21 +85,25 @@ const description = 'Get in touch about your Shopify project. Custom development
                 id="email"
                 name="email"
                 required
+                aria-required="true"
+                aria-describedby="email-error"
                 x-model="email"
                 :class="errors.email ? 'border-red-500' : 'border-gray-300'"
                 class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
                 placeholder="you@company.com"
               />
-              <p x-show="errors.email" x-text="errors.email" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
+              <p id="email-error" x-show="errors.email" x-text="errors.email" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
             </div>
           </div>
 
           <!-- Project Type -->
           <div>
-            <label class="block text-sm font-medium text-charcoal mb-2">Project Type</label>
-            <div class="grid grid-cols-3 gap-3">
+            <p id="project-type-label" class="block text-sm font-medium text-charcoal mb-2">Project Type</p>
+            <div role="radiogroup" aria-labelledby="project-type-label" class="grid grid-cols-3 gap-3">
               <button
                 type="button"
+                role="radio"
+                :aria-checked="projectType === 'one-off'"
                 @click="projectType = 'one-off'; scope = ''"
                 :class="projectType === 'one-off' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
@@ -106,6 +112,8 @@ const description = 'Get in touch about your Shopify project. Custom development
               </button>
               <button
                 type="button"
+                role="radio"
+                :aria-checked="projectType === 'retainer'"
                 @click="projectType = 'retainer'; scope = ''"
                 :class="projectType === 'retainer' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
@@ -114,6 +122,8 @@ const description = 'Get in touch about your Shopify project. Custom development
               </button>
               <button
                 type="button"
+                role="radio"
+                :aria-checked="projectType === 'other'"
                 @click="projectType = 'other'; scope = ''"
                 :class="projectType === 'other' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
@@ -125,10 +135,12 @@ const description = 'Get in touch about your Shopify project. Custom development
 
           <!-- Scope (one-off only) -->
           <div x-show="projectType === 'one-off'" x-transition style="display:none">
-            <label class="block text-sm font-medium text-charcoal mb-2">Scope</label>
-            <div class="grid grid-cols-2 gap-3">
+            <p id="scope-label" class="block text-sm font-medium text-charcoal mb-2">Scope</p>
+            <div role="radiogroup" aria-labelledby="scope-label" class="grid grid-cols-2 gap-3">
               <button
                 type="button"
+                role="radio"
+                :aria-checked="scope === 'fresh-build'"
                 @click="scope = 'fresh-build'"
                 :class="scope === 'fresh-build' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
@@ -137,6 +149,8 @@ const description = 'Get in touch about your Shopify project. Custom development
               </button>
               <button
                 type="button"
+                role="radio"
+                :aria-checked="scope === 'maintenance'"
                 @click="scope = 'maintenance'"
                 :class="scope === 'maintenance' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
@@ -210,12 +224,14 @@ const description = 'Get in touch about your Shopify project. Custom development
               name="message"
               rows="5"
               required
+              aria-required="true"
+              aria-describedby="message-error"
               x-model="message"
               :class="errors.message ? 'border-red-500' : 'border-gray-300'"
               class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors resize-y"
               placeholder="Tell me about your project — what you're looking to build, goals, timeline, etc."
             ></textarea>
-            <p x-show="errors.message" x-text="errors.message" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
+            <p id="message-error" x-show="errors.message" x-text="errors.message" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
           </div>
 
           <button
