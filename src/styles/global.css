@@ -13,6 +13,10 @@
     @apply font-sans text-charcoal bg-white;
   }
 
+  .font-serif {
+    letter-spacing: -0.04em;
+  }
+
   ::selection {
     @apply bg-forest/10 text-charcoal;
   }
