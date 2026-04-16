@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Gilda Display"', 'Georgia', 'serif'],
+        serif: ['Spectral', 'Georgia', 'serif'],
         sans: ['Jost', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
