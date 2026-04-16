@@ -127,6 +127,9 @@ const projects = [
             <div class="aspect-[16/10] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
 
               {/* Screenshot layer — loads behind, reveals on hover (skipped if noScreenshot) */}
+              {/* loading="eager" is intentional: screenshots must be ready before hover so the
+                  transition from logo → screenshot is instant. Lazy loading causes a visible
+                  blank flash on first hover. Accept the upfront cost for the UX benefit. */}
               {screenshotSrc && (
                 <div class="absolute inset-0 z-0">
                   <img
