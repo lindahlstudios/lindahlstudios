@@ -15,6 +15,7 @@ export default {
           light: '#3A7A5E',
           pale: '#E8F0EB',
         },
+        error: '#dc2626',
       },
       maxWidth: {
         site: '1200px',
