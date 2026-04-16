@@ -99,7 +99,7 @@ const description = 'Get in touch about your Shopify project. Custom development
           <!-- Project Type -->
           <div>
             <p id="project-type-label" class="block text-sm font-medium text-charcoal mb-2">Project Type</p>
-            <div role="radiogroup" aria-labelledby="project-type-label" class="grid grid-cols-3 gap-3">
+            <div role="radiogroup" aria-labelledby="project-type-label" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <button
                 type="button"
                 role="radio"
@@ -136,7 +136,7 @@ const description = 'Get in touch about your Shopify project. Custom development
           <!-- Scope (one-off only) -->
           <div x-show="projectType === 'one-off'" x-transition style="display:none">
             <p id="scope-label" class="block text-sm font-medium text-charcoal mb-2">Scope</p>
-            <div role="radiogroup" aria-labelledby="scope-label" class="grid grid-cols-2 gap-3">
+            <div role="radiogroup" aria-labelledby="scope-label" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button
                 type="button"
                 role="radio"
