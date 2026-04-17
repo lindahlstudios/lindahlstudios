@@ -35,26 +35,34 @@ const secondary = [
 ---
 
 <section id="testimonials" class="bg-white">
-  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
+  <div class="max-w-site mx-auto px-6 md:px-12 py-20 md:py-28">
+
     <h2
-      class="font-serif text-3xl md:text-4xl mb-10"
+      class="font-serif text-[36px] md:text-[52px] leading-[1.1] mb-10"
       data-sal="fade-up"
       data-sal-duration="500"
     >
       Words from clients
     </h2>
 
-    <!-- Featured testimonial -->
+    <!-- Featured testimonial — cream surface distinguishes it from secondary cards -->
     <div
-      class="border border-ui-border rounded-2xl p-8 md:p-12 bg-white mb-8"
+      class="border border-forest/[0.15] rounded-2xl p-8 md:p-12 bg-cream mb-6"
       data-sal="fade-up"
       data-sal-duration="500"
     >
-      <blockquote class="font-serif text-xl md:text-2xl leading-relaxed text-charcoal mb-6">
-        "{featured.quote}"
+      <!-- Decorative opening quote mark — typographic accent, not read aloud -->
+      <div
+        class="font-serif text-[56px] md:text-[72px] leading-none text-forest/30 mb-2 select-none"
+        aria-hidden="true"
+      >&ldquo;</div>
+
+      <blockquote class="font-serif text-[20px] md:text-[26px] leading-[1.65] text-charcoal mb-6 max-w-[660px]">
+        {featured.quote}
       </blockquote>
+
       <cite class="text-sm not-italic text-ui-muted">
-        <strong class="text-charcoal">{featured.name}</strong>, {featured.title}
+        <strong class="text-charcoal font-semibold">{featured.name}</strong>,{' '}{featured.title}
       </cite>
     </div>
 
@@ -67,15 +75,16 @@ const secondary = [
           data-sal-duration="500"
           data-sal-delay={String(i * 100)}
         >
-          <blockquote class="text-sm leading-relaxed text-ui-body italic mb-4">
-            "{testimonial.quote}"
+          <blockquote class="text-[14px] leading-[1.78] text-ui-body mb-4">
+            &ldquo;{testimonial.quote}&rdquo;
           </blockquote>
-          <cite class="text-xs not-italic text-ui-faint">
+          <cite class="text-[12px] not-italic text-ui-faint">
             <strong class="text-charcoal font-semibold">{testimonial.name}</strong>,{' '}
             {testimonial.title}
           </cite>
         </div>
       ))}
     </div>
+
   </div>
 </section>
