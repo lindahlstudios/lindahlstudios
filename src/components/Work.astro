@@ -121,10 +121,13 @@ const projects = [
             data-sal-delay={String(i * 80)}
           >
 
-            {/* Index number */}
+            {/* Index number — counts up from 00 as row enters view */}
             <div class="flex-shrink-0 w-6 md:w-8 self-start pt-2 hidden sm:block">
-              <span class="text-[11px] font-semibold tracking-[0.14em] uppercase text-forest/40 group-hover:text-forest transition-colors duration-200">
-                0{i + 1}
+              <span
+                class="text-[11px] font-semibold tracking-[0.14em] uppercase text-forest/40 group-hover:text-forest transition-colors duration-200 tabular-nums"
+                data-work-index={i + 1}
+              >
+                00
               </span>
             </div>
 
@@ -157,16 +160,16 @@ const projects = [
 
             </div>
 
-            {/* Thumbnail — logo by default, screenshot on hover */}
+            {/* Thumbnail — logo by default, screenshot wipes in on hover */}
             <div class="flex-shrink-0 hidden md:block w-[180px]">
               <div class="aspect-[16/10] rounded-lg overflow-hidden bg-gradient-to-br from-ui-subtle to-ui-placeholder relative">
 
-                {/* Screenshot — reveals on row hover */}
+                {/* Screenshot — wipes in left→right on row hover */}
                 {screenshotSrc && (
                   <img
                     src={screenshotSrc}
                     alt={`${project.client} website`}
-                    class="absolute inset-0 w-full h-full object-cover object-top opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    class="work-screenshot absolute inset-0 w-full h-full object-cover object-top"
                     loading="lazy"
                     width="360"
                     height="225"
@@ -174,7 +177,7 @@ const projects = [
                 )}
 
                 {/* Logo — fades out on hover if screenshot exists */}
-                <div class={`absolute inset-0 flex items-center justify-center ${screenshotSrc ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`}>
+                <div class={`absolute inset-0 flex items-center justify-center ${screenshotSrc ? 'transition-opacity duration-[220ms] group-hover:opacity-0' : ''}`}>
                   <img
                     src={localLogoSrc}
                     alt={`${project.client} logo`}
@@ -200,3 +203,74 @@ const projects = [
 
   </div>
 </section>
+
+<style>
+  /* Direction A: Clip-path wipe for screenshot reveal.
+     Screenshot starts fully clipped from the right, wipes left→right on hover.
+     Synced with logo opacity fade (both 220ms ease-out-quart). */
+  .work-screenshot {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.group:hover) .work-screenshot {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-screenshot {
+      clip-path: inset(0 0% 0 0);
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Direction C: Index counter animation.
+  // Numbers start at 00 (hidden under sal.js fade-up),
+  // count up to their target value as each row enters the viewport.
+  (function () {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const spans = document.querySelectorAll<HTMLElement>('[data-work-index]');
+
+    function showFinal(span: HTMLElement) {
+      const t = parseInt(span.dataset.workIndex!, 10);
+      span.textContent = t < 10 ? `0${t}` : `${t}`;
+    }
+
+    function runCounter(span: HTMLElement) {
+      const target = parseInt(span.dataset.workIndex!, 10);
+      let current = 0;
+      const tick = setInterval(() => {
+        current++;
+        span.textContent = current < 10 ? `0${current}` : `${current}`;
+        if (current >= target) clearInterval(tick);
+      }, 35);
+    }
+
+    // Reduced motion: show final values immediately, skip animation
+    if (prefersReducedMotion) {
+      spans.forEach(showFinal);
+      return;
+    }
+
+    // IntersectionObserver not available: show final values
+    if (!('IntersectionObserver' in window)) {
+      spans.forEach(showFinal);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          runCounter(entry.target as HTMLElement);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    spans.forEach((span) => observer.observe(span));
+  })();
+</script>
