@@ -70,7 +70,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 aria-describedby="name-error"
                 x-model="name"
                 :class="errors.name ? 'border-error' : 'border-ui-border-md'"
-                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
                 placeholder="Your name"
               />
               <p id="name-error" x-show="errors.name" x-text="errors.name" class="text-error text-xs mt-1.5" role="alert" style="display:none"></p>
@@ -89,7 +89,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 aria-describedby="email-error"
                 x-model="email"
                 :class="errors.email ? 'border-error' : 'border-ui-border-md'"
-                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
                 placeholder="you@company.com"
               />
               <p id="email-error" x-show="errors.email" x-text="errors.email" class="text-error text-xs mt-1.5" role="alert" style="display:none"></p>
@@ -106,7 +106,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 :aria-checked="projectType === 'one-off'"
                 @click="projectType = 'one-off'; scope = ''"
                 :class="projectType === 'one-off' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 One-off project
               </button>
@@ -116,7 +116,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 :aria-checked="projectType === 'retainer'"
                 @click="projectType = 'retainer'; scope = ''"
                 :class="projectType === 'retainer' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Ongoing retainer
               </button>
@@ -126,7 +126,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 :aria-checked="projectType === 'other'"
                 @click="projectType = 'other'; scope = ''"
                 :class="projectType === 'other' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Other
               </button>
@@ -143,7 +143,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 :aria-checked="scope === 'fresh-build'"
                 @click="scope = 'fresh-build'"
                 :class="scope === 'fresh-build' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Fresh build
               </button>
@@ -153,7 +153,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 :aria-checked="scope === 'maintenance'"
                 @click="scope = 'maintenance'"
                 :class="scope === 'maintenance' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Maintenance & improvements
               </button>
@@ -174,7 +174,7 @@ const description = 'Get in touch about your Shopify project. Custom development
               type="url"
               id="shopify-url"
               name="shopify_url"
-              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm placeholder:text-ui-faint focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
               placeholder="https://yourstore.myshopify.com"
             />
           </div>
@@ -186,7 +186,7 @@ const description = 'Get in touch about your Shopify project. Custom development
             <select
               id="budget"
               name="budget"
-              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
             >
               <option value="" disabled selected>Select a range</option>
               <option value="under-5k">Under $5,000</option>
@@ -205,7 +205,7 @@ const description = 'Get in touch about your Shopify project. Custom development
             <select
               id="timeframe"
               name="timeframe"
-              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
             >
               <option value="" selected>Not sure yet</option>
               <option value="asap">ASAP</option>
@@ -228,7 +228,7 @@ const description = 'Get in touch about your Shopify project. Custom development
               aria-describedby="message-error"
               x-model="message"
               :class="errors.message ? 'border-error' : 'border-ui-border-md'"
-              class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors resize-y"
+              class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors resize-y"
               placeholder="Tell me about your project — what you're looking to build, goals, timeline, etc."
             ></textarea>
             <p id="message-error" x-show="errors.message" x-text="errors.message" class="text-error text-xs mt-1.5" role="alert" style="display:none"></p>
@@ -236,7 +236,7 @@ const description = 'Get in touch about your Shopify project. Custom development
 
           <button
             type="submit"
-            class="group inline-block px-8 py-3.5 bg-forest text-white rounded-lg text-[15px] font-semibold hover:bg-forest-light transition-colors"
+            class="group inline-block px-8 py-3.5 bg-forest text-white rounded-lg text-[15px] font-semibold hover:bg-forest-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
           >
             Send Message <span class="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
           </button>
