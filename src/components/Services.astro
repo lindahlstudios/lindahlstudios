@@ -22,6 +22,7 @@ const services = [
     body: 'We do our best work with brands we know deeply. Retainer partnerships let us stay embedded in your business and ship improvements continuously.',
     startingAt: '$2,000',
     badge: '2/3 spots filled',
+    badgeWarm: true,
   },
   {
     title: 'AI for Your Business',
@@ -34,10 +35,18 @@ const services = [
 <section id="services" class="bg-white">
   <div class="max-w-site mx-auto px-6 md:px-12 py-20 md:py-28">
 
+    <p
+      class="text-[11px] font-semibold text-forest tracking-[0.12em] uppercase mb-3"
+      data-sal="fade-up"
+      data-sal-duration="500"
+    >
+      Services
+    </p>
     <h2
       class="font-serif text-[36px] md:text-[52px] leading-[1.1] mb-2"
       data-sal="fade-up"
       data-sal-duration="500"
+      data-sal-delay="80"
     >
       What we do
     </h2>
@@ -80,7 +89,7 @@ const services = [
                 <!-- Meta: badge + starting price -->
                 <div class="flex flex-wrap items-center gap-3 flex-shrink-0">
                   {service.badge && (
-                    <span class="inline-flex items-center text-[10px] font-semibold bg-forest-pale text-forest border border-forest/20 rounded-full px-3 py-1 tracking-[0.06em] uppercase">
+                    <span class={`inline-flex items-center text-[10px] font-semibold rounded-full px-3 py-1 tracking-[0.06em] uppercase ${service.badgeWarm ? 'bg-cream text-charcoal/60 border border-charcoal/[0.12]' : 'bg-forest-pale text-forest border border-forest/20'}`}>
                       {service.badge}
                     </span>
                   )}
