@@ -118,7 +118,7 @@ const projects = [
         return (
           <Tag
             {...linkProps}
-            class="group border border-ui-border rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
+            class="group border border-ui-border rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
             data-sal="fade-up"
             data-sal-duration="500"
             data-sal-delay={String(i * 100)}
@@ -136,6 +136,8 @@ const projects = [
                     src={screenshotSrc}
                     alt={`${project.client} website screenshot`}
                     class="w-full h-full object-cover object-top"
+                    width="1280"
+                    height="800"
                     loading="eager"
                   />
                 </div>
@@ -147,6 +149,8 @@ const projects = [
                   src={localLogoSrc}
                   alt={`${project.client} logo`}
                   class="max-w-[160px] max-h-[64px] w-auto object-contain"
+                  width="160"
+                  height="64"
                   loading="lazy"
                   onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"
                 />
