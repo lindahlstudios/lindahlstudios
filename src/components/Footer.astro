@@ -2,17 +2,20 @@
 
 ---
 
-<footer class="bg-white border-t border-ui-border">
-  <div class="max-w-site mx-auto px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    <a href="/" class="font-serif text-base text-charcoal">Lindahl Studios</a>
+<footer class="bg-white border-t border-ui-border overflow-hidden" data-footer>
+
+  <!-- Utility row -->
+  <div class="max-w-site mx-auto px-6 md:px-12 pt-8 pb-4 flex flex-col md:flex-row items-center justify-between gap-4">
+    <a href="/" class="font-serif text-base text-charcoal hover:text-forest transition-colors">Lindahl Studios</a>
 
     <div class="flex items-center gap-6">
       <a
         href="https://www.linkedin.com/in/davidalindahl"
         target="_blank"
         rel="noopener noreferrer"
-        class="p-2 -m-2 text-ui-faint hover:text-charcoal transition-colors"
+        class="p-3 -m-3 text-ui-faint hover:text-charcoal transition-colors"
         aria-label="LinkedIn"
+        data-magnetic
       >
         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -22,8 +25,9 @@
         href="https://www.github.com/lindahl-corp"
         target="_blank"
         rel="noopener noreferrer"
-        class="p-2 -m-2 text-ui-faint hover:text-charcoal transition-colors"
+        class="p-3 -m-3 text-ui-faint hover:text-charcoal transition-colors"
         aria-label="GitHub"
+        data-magnetic
       >
         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
@@ -35,4 +39,124 @@
       © {new Date().getFullYear()} Lindahl LLC · Made in the Pacific Northwest
     </p>
   </div>
+
+  <!-- Architectural wordmark — ambient typographic statement -->
+  <div class="px-4 md:px-6 pb-3 md:pb-5" aria-hidden="true">
+    <p
+      class="font-serif whitespace-nowrap leading-none tracking-[-0.04em] select-none pointer-events-none footer-wordmark"
+      style="font-size: clamp(56px, 11vw, 180px); color: rgba(26, 26, 26, 0.085); will-change: opacity, filter;"
+    >
+      Lindahl Studios
+    </p>
+  </div>
+
 </footer>
+
+<script>
+  (function () {
+    if (typeof window === 'undefined') return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Direction A: Architectural wordmark reveal ──────────────────────
+    const footer   = document.querySelector('[data-footer]') as HTMLElement | null;
+    const wordmark = footer?.querySelector('.footer-wordmark') as HTMLElement | null;
+
+    if (footer && wordmark) {
+      if (prefersReduced) {
+        // Immediately visible — no animation
+        wordmark.style.opacity = '1';
+        wordmark.style.filter  = 'none';
+      } else {
+        // Start hidden + blurred; reveal on scroll entry
+        wordmark.style.opacity    = '0';
+        wordmark.style.filter     = 'blur(20px)';
+        wordmark.style.transition =
+          'opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                wordmark.style.opacity = '1';
+                wordmark.style.filter  = 'blur(0)';
+                revealObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        revealObserver.observe(footer);
+      }
+    }
+
+    // ── Direction B: Magnetic social icons ─────────────────────────────
+    // Skip on touch devices — magnetic pull makes no sense without a cursor
+    if (prefersReduced || window.matchMedia('(hover: none)').matches) return;
+
+    const magneticEls = Array.from(
+      document.querySelectorAll('[data-magnetic]')
+    ) as HTMLElement[];
+    if (magneticEls.length === 0) return;
+
+    type MagState = { curX: number; curY: number; tgtX: number; tgtY: number; active: boolean; rafId: number | null };
+    const states = new Map<HTMLElement, MagState>(
+      magneticEls.map((el) => [el, { curX: 0, curY: 0, tgtX: 0, tgtY: 0, active: false, rafId: null }])
+    );
+
+    const RADIUS   = 80;   // px — activation distance from icon center
+    const MAX_PULL = 8;    // px — maximum displacement toward cursor
+    const SPRING   = 0.13; // spring coefficient (lower = more elastic)
+
+    function tick(el: HTMLElement, s: MagState) {
+      s.curX += (s.tgtX - s.curX) * SPRING;
+      s.curY += (s.tgtY - s.curY) * SPRING;
+      el.style.transform = `translate(${s.curX.toFixed(2)}px, ${s.curY.toFixed(2)}px)`;
+
+      const settled =
+        Math.abs(s.tgtX - s.curX) < 0.05 &&
+        Math.abs(s.tgtY - s.curY) < 0.05;
+
+      if (settled && !s.active) {
+        s.rafId = null;
+        el.style.transform = '';
+        return;
+      }
+      s.rafId = requestAnimationFrame(() => tick(el, s));
+    }
+
+    function ensureTick(el: HTMLElement, s: MagState) {
+      if (!s.rafId) s.rafId = requestAnimationFrame(() => tick(el, s));
+    }
+
+    // Single window listener dispatches to all magnetic elements
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        magneticEls.forEach((el) => {
+          const s    = states.get(el)!;
+          const rect = el.getBoundingClientRect();
+          const cx   = rect.left + rect.width  / 2;
+          const cy   = rect.top  + rect.height / 2;
+          const dx   = e.clientX - cx;
+          const dy   = e.clientY - cy;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < RADIUS && dist > 0) {
+            const intensity = 1 - dist / RADIUS;
+            s.tgtX  = (dx / dist) * MAX_PULL * intensity;
+            s.tgtY  = (dy / dist) * MAX_PULL * intensity;
+            s.active = true;
+          } else {
+            s.tgtX  = 0;
+            s.tgtY  = 0;
+            s.active = false;
+          }
+          ensureTick(el, s);
+        });
+      },
+      { passive: true }
+    );
+  })();
+</script>
