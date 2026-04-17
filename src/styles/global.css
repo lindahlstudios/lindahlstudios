@@ -23,27 +23,40 @@
 }
 
 /* ── sal.js animation overrides ──────────────────────────────────────────────
-   The sal.js fade-up animation is opacity-only by default — no translateY.
-   We add 20px upward movement and a crisper ease-out-expo easing globally
-   so animations are clearly visible and feel intentional, not accidental.    */
+   sal.js fade-up is opacity-only by default — no translateY. We add 20px
+   upward movement to make animations clearly visible. We use the `html`
+   prefix to get specificity 0-1-1, beating sal.css's 0-1-0 attribute
+   selectors regardless of stylesheet load order.                             */
 
 [data-sal] {
   /* Replace sal.js default 'ease' with ease-out-expo for all sal elements */
   --sal-easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-sal="fade-up"] {
+/* Higher specificity (0-1-1) ensures we override sal.css transition-property */
+html [data-sal="fade-up"] {
   transform: translateY(20px);
   transition-property: opacity, transform;
 }
 
-[data-sal="fade-up"].sal-animate,
-body.sal-disabled [data-sal="fade-up"] {
+html [data-sal="fade-up"].sal-animate,
+html body.sal-disabled [data-sal="fade-up"] {
   transform: translateY(0);
 }
 
+/* Hero: the staggered fade-up was designed as opacity-only and looks smooth
+   that way. Adding translateY here breaks the intended entrance. Restore
+   original behaviour by scoping out the hero section. */
+#hero [data-sal] {
+  --sal-easing: ease;
+}
+#hero [data-sal="fade-up"] {
+  transform: none;
+  transition-property: opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  [data-sal="fade-up"] {
+  html [data-sal="fade-up"] {
     transform: none;
   }
 }
