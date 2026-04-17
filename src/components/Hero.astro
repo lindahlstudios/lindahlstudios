@@ -31,6 +31,7 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
       data-sal="fade-up"
       data-sal-duration="500"
       data-sal-delay="100"
+      data-hero-h1
     >
       Shopify development with an operator's eye.
     </h1>
@@ -80,3 +81,85 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
     </div>
   </div>
 </section>
+
+<script>
+  // Cinematic word-reveal entrance for the hero h1.
+  // sal.js (fade-up) hides the h1 via opacity:0. We intercept via MutationObserver
+  // when sal adds "sal-animate", remove it immediately, kill sal's opacity rule,
+  // then run our clip-mask word reveal using the Web Animations API.
+  (function () {
+    if (typeof window === 'undefined') return;
+
+    const h1 = document.querySelector('[data-hero-h1]') as HTMLElement | null;
+    if (!h1) return;
+
+    // Respect reduced motion — let sal.js handle a simple fade instead
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const EASING = 'cubic-bezier(0.16, 1, 0.3, 1)'; // ease-out-quart
+    const WORD_DURATION = 780;
+    const WORD_STAGGER = 52;
+    const WORD_START_DELAY = 100; // slight offset after badge/eyebrow sal entrance
+
+    function runWordReveal() {
+      const text = h1!.textContent!.trim();
+      const words = text.split(/\s+/);
+
+      // Clear, then rebuild with per-word clip containers
+      h1!.innerHTML = '';
+      // h1 container is now visible (opacity removed by removeAttribute below);
+      // words are geometrically hidden inside overflow:hidden until they slide up
+
+      words.forEach((word, i) => {
+        // Outer: the clipping boundary — overflow:hidden hides word below the baseline
+        const outer = document.createElement('span');
+        outer.style.cssText =
+          'display:inline-block;overflow:hidden;vertical-align:bottom;' +
+          // Generous bottom padding so descenders (y, g, p) clear the clip at large sizes
+          'padding-bottom:0.2em;margin-bottom:-0.2em';
+
+        // Inner: the word itself — starts below the clip, slides upward
+        const inner = document.createElement('span');
+        inner.style.display = 'inline-block';
+        inner.textContent = word;
+
+        outer.appendChild(inner);
+        h1!.appendChild(outer);
+
+        // Preserve inter-word spaces
+        if (i < words.length - 1) {
+          h1!.appendChild(document.createTextNode(' '));
+        }
+
+        // Web Animations API — translateY only (GPU-composited, no layout thrash)
+        inner.animate(
+          [
+            { transform: 'translateY(110%)' },
+            { transform: 'translateY(0%)' },
+          ],
+          {
+            duration: WORD_DURATION,
+            delay: WORD_START_DELAY + i * WORD_STAGGER,
+            easing: EASING,
+            fill: 'both', // holds translateY(110%) during delay so it stays clipped
+          }
+        );
+      });
+    }
+
+    // Watch for sal.js adding "sal-animate" to take over the entrance
+    const observer = new MutationObserver(() => {
+      if (h1!.classList.contains('sal-animate')) {
+        // Intercept: remove sal's class + css rule before any transition fires
+        h1!.classList.remove('sal-animate');
+        h1!.style.transition = 'none';
+        h1!.removeAttribute('data-sal'); // kills sal.css opacity:0 rule
+        h1!.style.opacity = '1';         // container visible; words still clipped
+        observer.disconnect();
+        runWordReveal();
+      }
+    });
+
+    observer.observe(h1, { attributes: true, attributeFilter: ['class'] });
+  })();
+</script>
