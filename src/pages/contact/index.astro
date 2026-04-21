@@ -161,14 +161,14 @@ const description = 'Get in touch about your Shopify project. Custom development
             <p
               x-show="scope"
               x-text="scope === 'fresh-build' ? 'Fresh builds start at $5,000.' : 'Maintenance projects start at $1,000.'"
-              class="text-xs text-ui-faint mt-2"
+              class="text-xs text-ui-muted mt-2"
               style="display:none"
             ></p>
           </div>
 
           <div>
             <label for="shopify-url" class="block text-sm font-medium text-charcoal mb-2">
-              Shopify Store URL <span class="text-ui-faint font-normal">(if applicable)</span>
+              Shopify Store URL <span class="text-ui-muted font-normal">(if applicable)</span>
             </label>
             <input
               type="url"
@@ -200,7 +200,7 @@ const description = 'Get in touch about your Shopify project. Custom development
 
           <div>
             <label for="timeframe" class="block text-sm font-medium text-charcoal mb-2">
-              Target Timeframe <span class="text-ui-faint font-normal">(optional)</span>
+              Target Timeframe <span class="text-ui-muted font-normal">(optional)</span>
             </label>
             <select
               id="timeframe"
