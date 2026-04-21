@@ -44,9 +44,9 @@ const navLinks = [
     </button>
   </div>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-ui-border bg-white">
-    <div class="px-6 py-6 space-y-4">
+  <!-- Mobile menu — animated via grid-rows trick (no height: auto limitation) -->
+  <div id="mobile-menu" class="md:hidden border-t border-ui-border bg-white grid transition-[grid-template-rows] duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] grid-rows-[0fr] overflow-hidden" aria-hidden="true">
+    <div class="px-6 py-6 space-y-4 min-h-0">
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -66,27 +66,30 @@ const navLinks = [
 </nav>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu') as HTMLElement | null;
   const icon = document.getElementById('menu-icon');
 
+  function openMenu() {
+    menu?.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+    menu?.setAttribute('aria-hidden', 'false');
+    btn?.setAttribute('aria-expanded', 'true');
+    icon?.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+  }
+
+  function closeMenu() {
+    menu?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+    menu?.setAttribute('aria-hidden', 'true');
+    btn?.setAttribute('aria-expanded', 'false');
+    icon?.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+  }
+
   btn?.addEventListener('click', () => {
-    const isOpen = !menu?.classList.contains('hidden');
-    menu?.classList.toggle('hidden');
-    btn?.setAttribute('aria-expanded', String(!isOpen));
-    if (isOpen) {
-      icon?.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-    } else {
-      icon?.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-    }
+    menu?.classList.contains('grid-rows-[1fr]') ? closeMenu() : openMenu();
   });
 
   // Close on anchor click (mobile)
   document.querySelectorAll('#mobile-menu a').forEach((link) => {
-    link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-      btn?.setAttribute('aria-expanded', 'false');
-      icon?.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-    });
+    link.addEventListener('click', closeMenu);
   });
 </script>
