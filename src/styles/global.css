@@ -102,6 +102,24 @@ html body.sal-disabled [data-sal="fade-up"] {
     transform: scaleX(1);
   }
 
+  /* CTA button — press feedback + precise transition (replaces transition-colors on CTAs).
+     Specifies only the properties that change so we avoid animating everything.
+     Active scale gives instant tactile confirmation on press. */
+  .btn {
+    transition:
+      background-color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color     150ms cubic-bezier(0.23, 1, 0.32, 1),
+      color            150ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform        100ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .btn:active { transform: none; }
+  }
+
   /* Checkmark draw animation for contact success */
   @keyframes draw-check {
     to { stroke-dashoffset: 0; }
