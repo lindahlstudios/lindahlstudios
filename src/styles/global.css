@@ -82,9 +82,10 @@ html body.sal-disabled [data-sal="fade-up"] {
 /* ── end sal.js overrides ─────────────────────────────────────────────────── */
 
 @layer utilities {
-  /* Nav link underline — draws left to right on hover */
+  /* Nav link — color + underline draw on hover */
   .nav-link {
     position: relative;
+    transition: color 150ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   .nav-link::after {
     content: '';
@@ -98,8 +99,26 @@ html body.sal-disabled [data-sal="fade-up"] {
     transform-origin: left;
     transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .nav-link:hover::after {
-    transform: scaleX(1);
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  /* CTA button — press feedback + precise transition */
+  .btn {
+    transition:
+      background-color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color     150ms cubic-bezier(0.23, 1, 0.32, 1),
+      color            150ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform        100ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .btn:active { transform: none; }
   }
 
   /* Checkmark draw animation for contact success */
@@ -112,8 +131,26 @@ html body.sal-disabled [data-sal="fade-up"] {
     animation: draw-check 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.15s forwards;
   }
 
+  /* Shared color transition — used on nav logo and mobile links */
+  .color-transition {
+    transition: color 150ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Arrow nudge on CTA hover — shared across Hero, FooterCTA, and contact page */
+  .btn-arrow {
+    display: inline-block;
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .nav-link::after { transition: none; }
     .check-draw { animation: none; stroke-dashoffset: 0; }
+    .color-transition { transition: none; }
+    .btn-arrow { transition: none; }
   }
 }
