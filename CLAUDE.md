@@ -9,7 +9,7 @@ Boutique Shopify development studio website for David Lindahl. Static marketing 
 - **Framework**: Astro 4.16
 - **Styling**: Tailwind CSS 3.3 with custom design tokens
 - **Interactivity**: Alpine.js (contact form), sal.js (scroll animations)
-- **Fonts**: Spectral (display serif) + Jost (body sans) via Google Fonts
+- **Fonts**: Spectral (display serif) + Jost (body sans) via Fontsource (self-hosted)
 - **Deployment**: Netlify
 
 ## Design System
@@ -21,7 +21,7 @@ Boutique Shopify development studio website for David Lindahl. Static marketing 
 - `ui-border`, `ui-border-md`, `ui-faint`, `ui-muted`, `ui-body`, `ui-subtle` — semantic UI tokens
 
 ### Typography Scale (section headings)
-- Section h2: `font-serif text-[36px] md:text-[52px] leading-[1.1]`
+- Section h2: `font-serif text-[30px] md:text-[52px] leading-[1.1]`
 - Section padding: `py-20 md:py-28`
 - Body: `text-[14px] leading-[1.78] text-ui-body`
 
@@ -36,10 +36,11 @@ Boutique Shopify development studio website for David Lindahl. Static marketing 
 
 This is a 1-person project. Loosely follow git flow:
 
-- **Commit after each meaningful change** — don't batch unrelated changes into one commit
+- **Commit after each meaningful change** — don't batch unrelated changes into one commit; write the commit immediately when the task is done, not at the end of the session
+- Commit messages: concise, specific, lowercase — `fix: reduce hero top padding on mobile` not `update Hero.astro`
+- Use conventional commits: `feat:`, `fix:`, `perf:`, `polish:`, `chore:`, `docs:`
 - Feature work → feature branch → PR → merge to `master`
 - Hotfixes can go direct to `master` if trivial
-- Keep commit messages clear and specific (what changed and why, not just "update")
 - Current working branch: `fix/audit-findings`
 
 ## Key Files
