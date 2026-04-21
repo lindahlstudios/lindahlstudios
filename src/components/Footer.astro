@@ -67,8 +67,8 @@
     const wordmark = footer?.querySelector('.footer-wordmark') as HTMLElement | null;
 
     if (footer && wordmark) {
-      if (prefersReduced) {
-        // Immediately visible — no animation
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        // Immediately visible — no animation (reduced motion or unsupported browser)
         wordmark.style.opacity = '1';
         wordmark.style.filter  = 'none';
       } else {
