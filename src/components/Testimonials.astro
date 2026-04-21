@@ -59,19 +59,21 @@ const secondary = [
       data-sal="fade-up"
       data-sal-duration="500"
     >
-      <!-- Decorative opening quote mark — typographic accent, not read aloud -->
-      <div
-        class="font-serif text-[40px] md:text-[72px] leading-none text-forest/30 mb-2 select-none"
-        aria-hidden="true"
-      >&ldquo;</div>
+      <div class="max-w-[800px]">
+        <!-- Decorative opening quote mark — typographic accent, not read aloud -->
+        <div
+          class="font-serif text-[40px] md:text-[72px] leading-none text-forest/30 mb-4 select-none"
+          aria-hidden="true"
+        >&ldquo;</div>
 
-      <blockquote class="font-serif text-[20px] md:text-[26px] leading-[1.65] text-charcoal mb-6 max-w-[660px]">
-        {featured.quote}
-      </blockquote>
+        <blockquote class="font-serif text-[20px] md:text-[26px] leading-[1.65] tracking-[-0.02em] text-charcoal mb-6">
+          {featured.quote}
+        </blockquote>
 
-      <cite class="text-sm not-italic text-ui-muted">
-        <strong class="text-charcoal font-semibold">{featured.name}</strong>,{' '}{featured.title}
-      </cite>
+        <cite class="text-sm not-italic text-ui-muted">
+          <strong class="text-charcoal font-semibold">{featured.name}</strong>,{' '}{featured.title}
+        </cite>
+      </div>
     </div>
 
     <!-- Secondary testimonials -->
