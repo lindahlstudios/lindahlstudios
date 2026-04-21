@@ -51,6 +51,10 @@ This is a 1-person project. Loosely follow git flow:
 
 **Run `/simplify` before pushing for PR review** — Always run `/simplify` on the changed files before pushing a branch up for PR review. It catches duplicate logic, redundant state, stale comments, and efficiency issues before they show up in bot review findings.
 
+**`inert` required on CSS-animated collapsibles** — Animating visibility via `grid-template-rows: 0fr` (or `max-height`, `clip-path`, etc.) does not remove content from the tab order. `aria-hidden="true"` hides content from the accessibility tree but does not prevent keyboard focus. Always add the `inert` boolean attribute to the closed state and toggle it in open/close handlers (`removeAttribute('inert')` / `setAttribute('inert', '')`).
+
+_Last updated: 2026-04-21_
+
 ## Key Files
 
 - `src/components/` — all page sections as Astro components
