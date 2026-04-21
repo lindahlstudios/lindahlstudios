@@ -4,8 +4,8 @@ const bookingDate = new Date(now.getFullYear(), now.getMonth() + 2, 1);
 const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
 ---
 
-<section id="hero" class="bg-cream">
-  <div class="max-w-site mx-auto px-6 md:px-12 py-24 md:py-40">
+<section id="hero" class="bg-cream relative">
+  <div class="relative z-10 max-w-site mx-auto px-6 md:px-12 py-24 md:py-40">
     <div
       class="mb-5"
       data-sal="fade-up"
@@ -27,7 +27,7 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
     </p>
 
     <h1
-      class="font-serif text-[52px] md:text-[72px] lg:text-[88px] leading-[1.03] max-w-[820px] mb-10 tracking-[-0.06em]"
+      class="font-serif text-[44px] sm:text-[52px] md:text-[72px] lg:text-[88px] leading-[1.03] max-w-[820px] mb-10 tracking-[-0.06em]"
       data-sal="fade-up"
       data-sal-duration="500"
       data-sal-delay="100"
@@ -81,6 +81,38 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
     </div>
   </div>
 </section>
+
+<style>
+  /* ── Hero background layers ────────────────────────────────────────────────
+     Two pseudo-elements stack on top of the cream bg-cream base:
+       ::before — dot grid (forest green, 24px pitch, 1px dots at 9% opacity)
+       ::after  — fractal noise grain (neutral, ~6% opacity) for tactile depth
+     Content sits at z-10 above both.                                         */
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(45, 95, 74, 0.09) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* feTurbulence fractalNoise — tiles seamlessly, feels like paper grain.
+       mix-blend-mode: overlay is required: without it the neutral-gray noise
+       has near-zero contrast over cream and is invisible at any sane opacity. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
 
 <script>
   // Cinematic word-reveal entrance for the hero h1.
