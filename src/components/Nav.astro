@@ -44,9 +44,12 @@ const navLinks = [
     </button>
   </div>
 
-  <!-- Mobile menu — animated via grid-rows trick (no height: auto limitation) -->
+  <!-- Mobile menu — animated via grid-rows trick (no height: auto limitation).
+       Two-level structure is required: grid item must have min-h-0 and NO padding,
+       otherwise the padding prevents the track from collapsing to 0fr. -->
   <div id="mobile-menu" class="md:hidden border-t border-ui-border bg-white grid transition-[grid-template-rows] duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] grid-rows-[0fr] overflow-hidden" aria-hidden="true">
-    <div class="px-6 py-6 space-y-4 min-h-0">
+    <div class="min-h-0">
+    <div class="px-6 py-6 space-y-4">
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -62,6 +65,7 @@ const navLinks = [
         Let's Chat
       </a>
     </div>
+  </div>
   </div>
 </nav>
 
