@@ -99,11 +99,12 @@ const description = 'Get in touch about your Shopify project. Custom development
           <!-- Project Type -->
           <div>
             <p id="project-type-label" class="block text-sm font-medium text-charcoal mb-2">Project Type</p>
-            <div role="radiogroup" aria-labelledby="project-type-label" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div role="radiogroup" aria-labelledby="project-type-label" class="grid grid-cols-1 sm:grid-cols-3 gap-3" @keydown="handleRadioKey($event, $el)">
               <button
                 type="button"
                 role="radio"
                 :aria-checked="projectType === 'one-off'"
+                :tabindex="!projectType || projectType === 'one-off' ? 0 : -1"
                 @click="projectType = 'one-off'; scope = ''"
                 :class="projectType === 'one-off' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
@@ -114,6 +115,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 type="button"
                 role="radio"
                 :aria-checked="projectType === 'retainer'"
+                :tabindex="projectType === 'retainer' ? 0 : -1"
                 @click="projectType = 'retainer'; scope = ''"
                 :class="projectType === 'retainer' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
@@ -124,6 +126,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 type="button"
                 role="radio"
                 :aria-checked="projectType === 'other'"
+                :tabindex="projectType === 'other' ? 0 : -1"
                 @click="projectType = 'other'; scope = ''"
                 :class="projectType === 'other' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
@@ -136,11 +139,12 @@ const description = 'Get in touch about your Shopify project. Custom development
           <!-- Scope (one-off only) -->
           <div x-show="projectType === 'one-off'" x-transition style="display:none">
             <p id="scope-label" class="block text-sm font-medium text-charcoal mb-2">Scope</p>
-            <div role="radiogroup" aria-labelledby="scope-label" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div role="radiogroup" aria-labelledby="scope-label" class="grid grid-cols-1 sm:grid-cols-2 gap-3" @keydown="handleRadioKey($event, $el)">
               <button
                 type="button"
                 role="radio"
                 :aria-checked="scope === 'fresh-build'"
+                :tabindex="!scope || scope === 'fresh-build' ? 0 : -1"
                 @click="scope = 'fresh-build'"
                 :class="scope === 'fresh-build' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
@@ -151,6 +155,7 @@ const description = 'Get in touch about your Shopify project. Custom development
                 type="button"
                 role="radio"
                 :aria-checked="scope === 'maintenance'"
+                :tabindex="scope === 'maintenance' ? 0 : -1"
                 @click="scope = 'maintenance'"
                 :class="scope === 'maintenance' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
                 class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
@@ -276,6 +281,24 @@ const description = 'Get in touch about your Shopify project. Custom development
       }
 
       return Object.keys(this.errors).length === 0;
+    },
+
+    handleRadioKey(event: KeyboardEvent, container: HTMLElement) {
+      const radios = Array.from(container.querySelectorAll<HTMLElement>('[role="radio"]'));
+      const idx = radios.indexOf(document.activeElement as HTMLElement);
+      if (idx === -1) return;
+      let next = -1;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        next = (idx + 1) % radios.length;
+      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        next = (idx - 1 + radios.length) % radios.length;
+      }
+      if (next !== -1) {
+        radios[next].click();
+        radios[next].focus();
+      }
     },
 
     submit() {
