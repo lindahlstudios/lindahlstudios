@@ -9,8 +9,8 @@ const projects = [
       'UX overhaul',
     ],
     url: 'https://aviatornationride.com',
-    domain: 'aviatornationride.com',
     logoFile: 'aviator-nation-ride.svg',
+    screenshotFile: 'aviatornationride.com.avif',
   },
   {
     client: 'Aviator Nation',
@@ -21,8 +21,8 @@ const projects = [
       'CRO & UI improvements',
     ],
     url: 'https://aviatornation.com',
-    domain: 'aviatornation.com',
-    logoFile: 'aviator-nation.png',
+    logoFile: 'aviator-nation.avif',
+    screenshotFile: 'aviatornation.com.avif',
   },
   {
     client: 'Sunday Golf',
@@ -32,8 +32,8 @@ const projects = [
       'UX & CRO improvements',
     ],
     url: 'https://sundaygolf.com',
-    domain: 'sundaygolf.com',
     logoFile: 'sunday-golf.avif',
+    screenshotFile: 'sundaygolf.com.avif',
   },
   {
     client: 'Paravel',
@@ -43,9 +43,8 @@ const projects = [
       'Custom product tag feature',
       'Bug fixes',
     ],
-    // Site is no longer live — no screenshot available, logo-only
-    domain: 'tourparavel.com',
-    logoFile: 'paravel.png',
+    // Site no longer live — no screenshot available, logo-only
+    logoFile: 'paravel.avif',
     noScreenshot: true,
   },
   {
@@ -57,8 +56,8 @@ const projects = [
       'Theme customization',
     ],
     url: 'https://shop.rainierwatch.com',
-    domain: 'rainierwatch.com',
-    logoFile: 'rainier-watch.png',
+    logoFile: 'rainier-watch.avif',
+    screenshotFile: 'rainierwatch.com.avif',
   },
   {
     client: 'Revolution Fibers',
@@ -68,8 +67,8 @@ const projects = [
       'UX & conversion improvements',
     ],
     url: 'https://x.com/austriker27/status/1757889669231255935',
-    domain: 'revolutionfibers.com',
     logoFile: 'revolution-fibers.avif',
+    screenshotFile: 'revolutionfibers.com.avif',
   },
   {
     client: 'Live Like the Mountain Is Out',
@@ -79,10 +78,9 @@ const projects = [
       'On-brand theme customization',
       'CRO features',
     ],
-    // Site no longer live — using archived screenshot
-    domain: 'southsoundproud.org',
+    // Site no longer live — no screenshot available, logo-only
     logoFile: 'south-sound-proud.svg',
-    screenshotFile: 'south-sound-proud.jpg',
+    noScreenshot: true,
   },
 ];
 ---
@@ -90,10 +88,18 @@ const projects = [
 <section id="work" class="bg-white">
   <div class="max-w-site mx-auto px-6 md:px-12 py-20 md:py-28">
 
-    <h2
-      class="font-serif text-[36px] md:text-[52px] leading-[1.1] mb-10"
+    <p
+      class="text-[11px] font-semibold text-forest tracking-[0.12em] uppercase mb-3"
       data-sal="fade-up"
       data-sal-duration="500"
+    >
+      Selected Work
+    </p>
+    <h2
+      class="font-serif text-[30px] md:text-[52px] leading-[1.1] mb-10"
+      data-sal="fade-up"
+      data-sal-duration="500"
+      data-sal-delay="80"
     >
       Work
     </h2>
@@ -101,11 +107,9 @@ const projects = [
     <!-- Editorial project list — full-width rows with hairline separators -->
     <div class="border-b border-forest/[0.15]">
       {projects.map((project, i) => {
-        const screenshotSrc = project.noScreenshot
+        const screenshotSrc = project.noScreenshot || !project.screenshotFile
           ? null
-          : project.screenshotFile
-            ? `/images/screenshots/${project.screenshotFile}`
-            : `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
+          : `/images/screenshots/${project.screenshotFile}`;
         const localLogoSrc = `/images/logos/${project.logoFile}`;
         const Tag = project.url ? 'a' : 'div';
         const linkProps = project.url
@@ -115,56 +119,17 @@ const projects = [
         return (
           <Tag
             {...linkProps}
-            class="group border-t border-forest/[0.15] -mx-6 md:-mx-12 px-6 md:px-12 py-8 md:py-10 flex gap-6 md:gap-10 items-center hover:bg-forest-pale/30 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
+            class="group border-t border-forest/[0.15] -mx-6 md:-mx-12 px-6 md:px-12 py-6 md:py-10 flex flex-col md:flex-row gap-4 md:gap-10 md:items-center hover:bg-forest-pale/30 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
             data-sal="fade-up"
             data-sal-duration="500"
             data-sal-delay={String(i * 80)}
           >
 
-            {/* Index number — counts up from 00 as row enters view */}
-            <div class="flex-shrink-0 w-6 md:w-8 self-start pt-2 hidden sm:block">
-              <span
-                class="text-[11px] font-semibold tracking-[0.14em] uppercase text-forest/40 group-hover:text-forest transition-colors duration-200 tabular-nums"
-                data-work-index={i + 1}
-              >
-                00
-              </span>
-            </div>
-
-            {/* Main content */}
-            <div class="flex-1 min-w-0">
-
-              {/* Client name + project type */}
-              <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mb-3">
-                <h3 class="font-serif text-[26px] md:text-[34px] leading-[1.08] tracking-[-0.02em] group-hover:text-forest transition-colors duration-200">
-                  {project.client}
-                </h3>
-                <span class="text-[11px] font-semibold tracking-[0.08em] uppercase text-ui-faint flex-shrink-0">
-                  {project.type}
-                </span>
-              </div>
-
-              {/* Work tags */}
-              <div class="flex flex-wrap gap-2">
-                {project.work.map((item) => (
-                  <span class="inline-flex items-center text-[11px] font-medium bg-forest-pale text-forest border border-forest/[0.15] rounded-full px-2.5 py-1">
-                    {item}
-                  </span>
-                ))}
-                {!project.url && (
-                  <span class="inline-flex items-center text-[11px] font-medium border border-ui-border text-ui-faint rounded-full px-2.5 py-1">
-                    Archived
-                  </span>
-                )}
-              </div>
-
-            </div>
-
-            {/* Thumbnail — logo by default, screenshot wipes in on hover */}
-            <div class="flex-shrink-0 hidden md:block w-[180px]">
+            {/* Thumbnail — full-width on mobile (stacks above content), 180px column on desktop */}
+            <div class="w-full md:w-[180px] md:flex-shrink-0 order-first md:order-last">
               <div class="aspect-[16/10] rounded-lg overflow-hidden bg-gradient-to-br from-ui-subtle to-ui-placeholder relative">
 
-                {/* Screenshot — wipes in left→right on row hover */}
+                {/* Screenshot — wipes in left→right on desktop hover; shows by default on touch */}
                 {screenshotSrc && (
                   <img
                     src={screenshotSrc}
@@ -173,18 +138,19 @@ const projects = [
                     loading="lazy"
                     width="360"
                     height="225"
+                    onerror="this.style.display='none'; this.nextElementSibling.classList.remove('group-hover:opacity-0');"
                   />
                 )}
 
-                {/* Logo — fades out on hover if screenshot exists */}
+                {/* Logo — fades out on desktop hover if screenshot exists */}
                 <div class={`absolute inset-0 flex items-center justify-center ${screenshotSrc ? 'transition-opacity duration-[220ms] group-hover:opacity-0' : ''}`}>
                   <img
                     src={localLogoSrc}
                     alt={`${project.client} logo`}
-                    class="max-w-[100px] max-h-[36px] w-auto object-contain"
+                    class="max-w-[120px] max-h-[44px] w-auto object-contain"
                     loading="lazy"
-                    width="100"
-                    height="36"
+                    width="120"
+                    height="44"
                     onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"
                   />
                   {/* Text fallback if logo image fails */}
@@ -194,6 +160,50 @@ const projects = [
                 </div>
 
               </div>
+            </div>
+
+            {/* Index + Main content — side by side */}
+            <div class="flex gap-6 md:gap-10 items-start flex-1 min-w-0">
+
+              {/* Index number — counts up from 00 as row enters view */}
+              <div class="flex-shrink-0 w-6 md:w-8 pt-1 hidden sm:block">
+                <span
+                  class="text-[11px] font-semibold tracking-[0.14em] uppercase text-forest/40 group-hover:text-forest transition-colors duration-200 tabular-nums"
+                  data-work-index={i + 1}
+                >
+                  00
+                </span>
+              </div>
+
+              {/* Main content */}
+              <div class="flex-1 min-w-0">
+
+                {/* Client name + project type */}
+                <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mb-3">
+                  <h3 class="font-serif text-[22px] md:text-[34px] leading-[1.08] tracking-[-0.02em] group-hover:text-forest transition-colors duration-200">
+                    {project.client}
+                  </h3>
+                  <span class="text-[11px] font-semibold tracking-[0.08em] uppercase text-ui-muted flex-shrink-0">
+                    {project.type}
+                  </span>
+                </div>
+
+                {/* Work tags */}
+                <div class="flex flex-wrap gap-2">
+                  {project.work.map((item) => (
+                    <span class="inline-flex items-center text-[11px] font-medium bg-forest-pale text-forest border border-forest/[0.15] rounded-full px-2.5 py-1">
+                      {item}
+                    </span>
+                  ))}
+                  {!project.url && (
+                    <span class="inline-flex items-center text-[11px] font-medium border border-ui-border text-ui-muted rounded-full px-2.5 py-1">
+                      Archived
+                    </span>
+                  )}
+                </div>
+
+              </div>
+
             </div>
 
           </Tag>
@@ -221,6 +231,16 @@ const projects = [
     .work-screenshot {
       clip-path: inset(0 0% 0 0);
       transition: none;
+    }
+  }
+
+  /* Touch devices have no hover — show screenshot by default and
+     layer it above the logo so both don't overlap awkwardly. */
+  @media (hover: none) {
+    .work-screenshot {
+      clip-path: inset(0 0% 0 0);
+      transition: none;
+      z-index: 1;
     }
   }
 </style>
