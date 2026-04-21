@@ -43,6 +43,12 @@ This is a 1-person project. Loosely follow git flow:
 - Hotfixes can go direct to `master` if trivial
 - Current working branch: `fix/audit-findings`
 
+## Rules Claude Must Follow
+
+**IntersectionObserver feature detection** — Always check `'IntersectionObserver' in window` before using the API. If elements are hidden before the observer is created (e.g. `opacity = 0`), a missing API leaves them permanently hidden. Add the check to the same guard as `prefers-reduced-motion` and show a static fallback.
+
+**ARIA radiogroup keyboard contract** — `role="radiogroup"` + `role="radio"` on buttons requires the full ARIA radio interaction pattern: roving tabindex (one `tabindex="0"`, rest `tabindex="-1"`) and arrow-key navigation (Left/Up = previous, Right/Down = next, wrapping). Without it, screen-reader users hear radio semantics but get button behavior. Either use native `<input type="radio">` or implement `handleRadioKey` + `:tabindex` bindings.
+
 ## Key Files
 
 - `src/components/` — all page sections as Astro components
