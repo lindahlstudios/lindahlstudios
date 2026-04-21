@@ -243,6 +243,13 @@ const projects = [
       z-index: 1;
     }
   }
+
+  /* Gate the clip-path wipe to pointer-capable devices only */
+  @media not (hover: hover) {
+    :global(.group:hover) .work-screenshot {
+      clip-path: inset(0 100% 0 0);
+    }
+  }
 </style>
 
 <script>
