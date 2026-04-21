@@ -243,7 +243,7 @@ const description = 'Get in touch about your Shopify project. Custom development
             type="submit"
             class="group btn inline-block px-8 py-3.5 bg-forest text-white rounded-lg text-[15px] font-semibold hover:bg-forest-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
           >
-            Send Message <span class="contact-arrow inline-block">→</span>
+            Send Message <span class="btn-arrow">→</span>
           </button>
         </form>
       </div>
@@ -252,16 +252,6 @@ const description = 'Get in touch about your Shopify project. Custom development
   <Footer />
 </BaseLayout>
 
-<style>
-  .contact-arrow {
-    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .group:hover .contact-arrow {
-      transform: translateX(4px);
-    }
-  }
-</style>
 
 <script>
   import Alpine from 'alpinejs';

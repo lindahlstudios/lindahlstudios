@@ -70,7 +70,7 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
         href="/contact"
         class="group btn inline-block px-8 py-3.5 bg-forest text-white rounded-lg text-[15px] font-semibold hover:bg-forest-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
       >
-        Start a Project <span class="btn-arrow inline-block">→</span>
+        Start a Project <span class="btn-arrow">→</span>
       </a>
       <a
         href="#work"
@@ -88,16 +88,6 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
        ::before — dot grid (forest green, 24px pitch, 1px dots at 9% opacity)
        ::after  — fractal noise grain (neutral, ~6% opacity) for tactile depth
      Content sits at z-10 above both.                                         */
-
-  /* Arrow nudge — hover-only devices only */
-  @media (hover: hover) and (pointer: fine) {
-    .group:hover .btn-arrow {
-      transform: translateX(4px);
-    }
-  }
-  .btn-arrow {
-    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
 
   #hero::before {
     content: '';

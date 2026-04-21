@@ -105,9 +105,7 @@ html body.sal-disabled [data-sal="fade-up"] {
     }
   }
 
-  /* CTA button — press feedback + precise transition (replaces transition-colors on CTAs).
-     Specifies only the properties that change so we avoid animating everything.
-     Active scale gives instant tactile confirmation on press. */
+  /* CTA button — press feedback + precise transition */
   .btn {
     transition:
       background-color 150ms cubic-bezier(0.23, 1, 0.32, 1),
@@ -133,8 +131,26 @@ html body.sal-disabled [data-sal="fade-up"] {
     animation: draw-check 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.15s forwards;
   }
 
+  /* Shared color transition — used on nav logo and mobile links */
+  .color-transition {
+    transition: color 150ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Arrow nudge on CTA hover — shared across Hero, FooterCTA, and contact page */
+  .btn-arrow {
+    display: inline-block;
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .nav-link::after { transition: none; }
     .check-draw { animation: none; stroke-dashoffset: 0; }
+    .color-transition { transition: none; }
+    .btn-arrow { transition: none; }
   }
 }
