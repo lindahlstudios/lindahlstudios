@@ -1,3 +1,12 @@
+/* Fontsource — self-hosted fonts (no external network requests) */
+@import '@fontsource/spectral/latin-400.css';
+@import '@fontsource/spectral/latin-500.css';
+@import '@fontsource/spectral/latin-600.css';
+@import '@fontsource/jost/latin-400.css';
+@import '@fontsource/jost/latin-500.css';
+@import '@fontsource/jost/latin-600.css';
+@import '@fontsource/jost/latin-700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,6 +24,15 @@
 
   .font-serif {
     letter-spacing: -0.04em;
+  }
+
+  /* text-wrap: balance on all headings prevents orphaned words on the last line.
+     Tailwind 3.3 doesn't ship text-balance/text-pretty utilities — defined here.
+     balance is preferred over pretty for headings: it equalises line lengths
+     rather than just fixing the last-line orphan. The browser limits balance to
+     ~4 lines; longer headings fall back gracefully. */
+  h1, h2, h3 {
+    text-wrap: balance;
   }
 
   ::selection {
