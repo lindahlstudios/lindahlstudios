@@ -1,3 +1,12 @@
+/* Fontsource — self-hosted fonts (no external network requests) */
+@import '@fontsource/spectral/latin-400.css';
+@import '@fontsource/spectral/latin-500.css';
+@import '@fontsource/spectral/latin-600.css';
+@import '@fontsource/jost/latin-400.css';
+@import '@fontsource/jost/latin-500.css';
+@import '@fontsource/jost/latin-600.css';
+@import '@fontsource/jost/latin-700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,10 +19,101 @@
   }
 
   body {
-    @apply font-sans text-charcoal bg-white;
+    @apply font-sans text-charcoal bg-white min-h-screen flex flex-col;
+  }
+
+  .font-serif {
+    letter-spacing: -0.04em;
+  }
+
+  /* text-wrap: balance on all headings prevents orphaned words on the last line.
+     Tailwind 3.3 doesn't ship text-balance/text-pretty utilities — defined here.
+     balance is preferred over pretty for headings: it equalises line lengths
+     rather than just fixing the last-line orphan. The browser limits balance to
+     ~4 lines; longer headings fall back gracefully. */
+  h1, h2, h3 {
+    text-wrap: balance;
   }
 
   ::selection {
     @apply bg-forest/10 text-charcoal;
+  }
+}
+
+/* ── sal.js animation overrides ──────────────────────────────────────────────
+   sal.js fade-up is opacity-only by default — no translateY. We add 20px
+   upward movement to make animations clearly visible. We use the `html`
+   prefix to get specificity 0-1-1, beating sal.css's 0-1-0 attribute
+   selectors regardless of stylesheet load order.                             */
+
+[data-sal] {
+  /* Replace sal.js default 'ease' with ease-out-expo for all sal elements */
+  --sal-easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Higher specificity (0-1-1) ensures we override sal.css transition-property */
+html [data-sal="fade-up"] {
+  transform: translateY(20px);
+  transition-property: opacity, transform;
+}
+
+html [data-sal="fade-up"].sal-animate,
+html body.sal-disabled [data-sal="fade-up"] {
+  transform: translateY(0);
+}
+
+/* Hero: the staggered fade-up was designed as opacity-only and looks smooth
+   that way. Adding translateY here breaks the intended entrance. Restore
+   original behaviour by scoping out the hero section. */
+#hero [data-sal] {
+  --sal-easing: ease;
+}
+#hero [data-sal="fade-up"] {
+  transform: none;
+  transition-property: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html [data-sal="fade-up"] {
+    transform: none;
+  }
+}
+
+/* ── end sal.js overrides ─────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Nav link underline — draws left to right on hover */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Checkmark draw animation for contact success */
+  @keyframes draw-check {
+    to { stroke-dashoffset: 0; }
+  }
+  .check-draw {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: draw-check 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.15s forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link::after { transition: none; }
+    .check-draw { animation: none; stroke-dashoffset: 0; }
   }
 }

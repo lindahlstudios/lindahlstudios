@@ -5,111 +5,112 @@ const projects = [
     type: 'Shopify Plus · Full Redesign',
     work: [
       'Led total website redesign',
-      'Website overall',
-      'Built custom metaobject features',
+      'Custom metaobject features',
+      'UX overhaul',
     ],
     url: 'https://aviatornationride.com',
-    domain: 'aviatornationride.com',
     logoFile: 'aviator-nation-ride.svg',
+    screenshotFile: 'aviatornationride.com.avif',
   },
   {
     client: 'Aviator Nation',
     type: 'Shopify Plus · Theme & CRO',
     work: [
       'Regular theme maintenance',
-      'Replaced apps like Rebuy with custom development & design',
-      'Implemented CRO and UI improvements',
+      'Replaced Rebuy with custom dev',
+      'CRO & UI improvements',
     ],
     url: 'https://aviatornation.com',
-    domain: 'aviatornation.com',
-    logoFile: 'aviator-nation.png',
+    logoFile: 'aviator-nation.avif',
+    screenshotFile: 'aviatornation.com.avif',
   },
   {
     client: 'Sunday Golf',
     type: 'Shopify · Theme Customization',
     work: [
-      'Shopify Theme Customizations',
-      'UX and CRO improvements',
+      'Theme customizations',
+      'UX & CRO improvements',
     ],
     url: 'https://sundaygolf.com',
-    domain: 'sundaygolf.com',
     logoFile: 'sunday-golf.avif',
+    screenshotFile: 'sundaygolf.com.avif',
   },
   {
     client: 'Paravel',
     type: 'Shopify · Custom Features',
     work: [
-      'Shopify Theme Customizations',
-      'Built Product Tag feature',
-      'Various bugfixes',
+      'Theme customizations',
+      'Custom product tag feature',
+      'Bug fixes',
     ],
-    // Site is no longer live — no screenshot available, logo-only card
-    domain: 'tourparavel.com',
-    logoFile: 'paravel.png',
+    // Site no longer live — no screenshot available, logo-only
+    logoFile: 'paravel.avif',
     noScreenshot: true,
   },
   {
     client: 'Rainier Watch',
     type: 'Shopify · Custom Development',
     work: [
-      'Custom branded backorder feature',
-      'FOMO features (low stock indicator)',
-      'Customized Shopify Theme',
+      'Custom backorder feature',
+      'Low stock FOMO indicators',
+      'Theme customization',
     ],
     url: 'https://shop.rainierwatch.com',
-    domain: 'rainierwatch.com',
-    logoFile: 'rainier-watch.png',
+    logoFile: 'rainier-watch.avif',
+    screenshotFile: 'rainierwatch.com.avif',
   },
   {
     client: 'Revolution Fibers',
     type: 'Shopify · UX Optimization',
     work: [
-      'Built custom product variant selector',
-      'Improved UX and conversions',
+      'Custom variant selector',
+      'UX & conversion improvements',
     ],
     url: 'https://x.com/austriker27/status/1757889669231255935',
-    domain: 'revolutionfibers.com',
     logoFile: 'revolution-fibers.avif',
+    screenshotFile: 'revolutionfibers.com.avif',
   },
   {
-    client: 'Live Like the Mountain Is Out Shop',
+    client: 'Live Like the Mountain Is Out',
     type: 'Shopify · Full Build',
     work: [
-      'Rapid Shopify storefront build',
-      'Customized theme to be on brand',
-      'Implemented CRO features',
+      'Rapid storefront build',
+      'On-brand theme customization',
+      'CRO features',
     ],
-    // Site no longer live — using archived screenshot, no outbound link
-    domain: 'southsoundproud.org',
+    // Site no longer live — no screenshot available, logo-only
     logoFile: 'south-sound-proud.svg',
-    screenshotFile: 'south-sound-proud.jpg',
+    noScreenshot: true,
   },
 ];
 ---
 
-<section id="work" class="bg-gray-50">
-  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
-    <h2
-      class="font-serif text-3xl md:text-4xl mb-10"
+<section id="work" class="bg-white">
+  <div class="max-w-site mx-auto px-6 md:px-12 py-20 md:py-28">
+
+    <p
+      class="text-[11px] font-semibold text-forest tracking-[0.12em] uppercase mb-3"
       data-sal="fade-up"
       data-sal-duration="500"
+    >
+      Selected Work
+    </p>
+    <h2
+      class="font-serif text-[30px] md:text-[52px] leading-[1.1] mb-10"
+      data-sal="fade-up"
+      data-sal-duration="500"
+      data-sal-delay="80"
     >
       Work
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Editorial project list — full-width rows with hairline separators -->
+    <div class="border-b border-forest/[0.15]">
       {projects.map((project, i) => {
-        // Use a local static screenshot if provided, otherwise hit the Microlink API
-        const screenshotSrc = project.noScreenshot
+        const screenshotSrc = project.noScreenshot || !project.screenshotFile
           ? null
-          : project.screenshotFile
-            ? `/images/screenshots/${project.screenshotFile}`
-            : `https://api.microlink.io/?url=https://${project.domain}&screenshot=true&meta=false&embed=screenshot.url`;
-        // Local logo path — drop files in public/images/logos/ to activate
+          : `/images/screenshots/${project.screenshotFile}`;
         const localLogoSrc = `/images/logos/${project.logoFile}`;
-        // Clearbit logo API was shut down Dec 2025 — removed from fallback chain
-
-        // If no URL, render as a plain div (no broken outbound link)
         const Tag = project.url ? 'a' : 'div';
         const linkProps = project.url
           ? { href: project.url, target: '_blank', rel: 'noopener noreferrer' }
@@ -118,71 +119,181 @@ const projects = [
         return (
           <Tag
             {...linkProps}
-            class="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow"
+            class="group border-t border-forest/[0.15] -mx-6 md:-mx-12 px-6 md:px-12 py-6 md:py-10 flex flex-col md:flex-row gap-4 md:gap-10 md:items-center hover:bg-forest-pale/30 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
             data-sal="fade-up"
             data-sal-duration="500"
-            data-sal-delay={String(i * 100)}
+            data-sal-delay={String(i * 80)}
           >
-            {/* Visual header: logo by default, screenshot on hover */}
-            <div class="aspect-[16/10] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
 
-              {/* Screenshot layer — loads behind, reveals on hover (skipped if noScreenshot) */}
-              {screenshotSrc && (
-                <div class="absolute inset-0 z-0">
+            {/* Thumbnail — full-width on mobile (stacks above content), 180px column on desktop */}
+            <div class="w-full md:w-[180px] md:flex-shrink-0 order-first md:order-last">
+              <div class="aspect-[16/10] rounded-lg overflow-hidden bg-gradient-to-br from-ui-subtle to-ui-placeholder relative">
+
+                {/* Screenshot — wipes in left→right on desktop hover; shows by default on touch */}
+                {screenshotSrc && (
                   <img
                     src={screenshotSrc}
-                    alt={`${project.client} website screenshot`}
-                    class="w-full h-full object-cover object-top"
-                    loading="eager"
+                    alt={`${project.client} website`}
+                    class="work-screenshot absolute inset-0 w-full h-full object-cover object-top"
+                    loading="lazy"
+                    width="360"
+                    height="225"
+                    onerror="this.style.display='none'; this.nextElementSibling.classList.remove('group-hover:opacity-0');"
                   />
-                </div>
-              )}
+                )}
 
-              {/* Logo layer — fades out on hover unless noScreenshot, then stays put */}
-              <div class={`absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-br from-gray-50 to-gray-100 ${screenshotSrc ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`}>
-                <img
-                  src={localLogoSrc}
-                  alt={`${project.client} logo`}
-                  class="max-w-[160px] max-h-[64px] w-auto object-contain"
-                  loading="lazy"
-                  onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"
-                />
-                {/* Final fallback: client name as text */}
-                <span class="font-serif text-xl text-forest/40 hidden">
-                  {project.client}
+                {/* Logo — fades out on desktop hover if screenshot exists */}
+                <div class={`absolute inset-0 flex items-center justify-center ${screenshotSrc ? 'transition-opacity duration-[220ms] group-hover:opacity-0' : ''}`}>
+                  <img
+                    src={localLogoSrc}
+                    alt={`${project.client} logo`}
+                    class="max-w-[120px] max-h-[44px] w-auto object-contain"
+                    loading="lazy"
+                    width="120"
+                    height="44"
+                    onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"
+                  />
+                  {/* Text fallback if logo image fails */}
+                  <span class="font-serif text-sm text-forest/40 hidden">
+                    {project.client}
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Index + Main content — side by side */}
+            <div class="flex gap-6 md:gap-10 items-start flex-1 min-w-0">
+
+              {/* Index number — counts up from 00 as row enters view */}
+              <div class="flex-shrink-0 w-6 md:w-8 pt-1 hidden sm:block">
+                <span
+                  class="text-[11px] font-semibold tracking-[0.14em] uppercase text-forest/40 group-hover:text-forest transition-colors duration-200 tabular-nums"
+                  data-work-index={i + 1}
+                >
+                  00
                 </span>
               </div>
 
+              {/* Main content */}
+              <div class="flex-1 min-w-0">
+
+                {/* Client name + project type */}
+                <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mb-3">
+                  <h3 class="font-serif text-[22px] md:text-[34px] leading-[1.08] tracking-[-0.02em] group-hover:text-forest transition-colors duration-200">
+                    {project.client}
+                  </h3>
+                  <span class="text-[11px] font-semibold tracking-[0.08em] uppercase text-ui-muted flex-shrink-0">
+                    {project.type}
+                  </span>
+                </div>
+
+                {/* Work tags */}
+                <div class="flex flex-wrap gap-2">
+                  {project.work.map((item) => (
+                    <span class="inline-flex items-center text-[11px] font-medium bg-forest-pale text-forest border border-forest/[0.15] rounded-full px-2.5 py-1">
+                      {item}
+                    </span>
+                  ))}
+                  {!project.url && (
+                    <span class="inline-flex items-center text-[11px] font-medium border border-ui-border text-ui-muted rounded-full px-2.5 py-1">
+                      Archived
+                    </span>
+                  )}
+                </div>
+
+              </div>
+
             </div>
 
-            <div class="p-6">
-              <div class="flex items-start justify-between gap-2 mb-1">
-                <h3 class="text-base font-bold group-hover:text-forest transition-colors">
-                  {project.client}
-                </h3>
-                {!project.url && (
-                  <span class="text-[10px] font-medium text-gray-400 border border-gray-200 rounded-full px-2 py-0.5 flex-shrink-0 mt-0.5">
-                    Archived
-                  </span>
-                )}
-              </div>
-              <p class="text-sm text-gray-400 mb-3">{project.type}</p>
-              <ul class="space-y-1">
-                {project.work.map((item) => (
-                  <li class="text-sm text-gray-600 flex items-start gap-2">
-                    <span class="text-forest/50 mt-1.5 flex-shrink-0">
-                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 12 12">
-                        <circle cx="6" cy="6" r="2" />
-                      </svg>
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </Tag>
         );
       })}
     </div>
+
   </div>
 </section>
+
+<style>
+  /* Direction A: Clip-path wipe for screenshot reveal.
+     Screenshot starts fully clipped from the right, wipes left→right on hover.
+     Synced with logo opacity fade (both 220ms ease-out-quart). */
+  .work-screenshot {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.group:hover) .work-screenshot {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-screenshot {
+      clip-path: inset(0 0% 0 0);
+      transition: none;
+    }
+  }
+
+  /* Touch devices have no hover — show screenshot by default and
+     layer it above the logo so both don't overlap awkwardly. */
+  @media (hover: none) {
+    .work-screenshot {
+      clip-path: inset(0 0% 0 0);
+      transition: none;
+      z-index: 1;
+    }
+  }
+</style>
+
+<script>
+  // Direction C: Index counter animation.
+  // Numbers start at 00 (hidden under sal.js fade-up),
+  // count up to their target value as each row enters the viewport.
+  (function () {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const spans = document.querySelectorAll<HTMLElement>('[data-work-index]');
+
+    const fmt = (n: number) => n < 10 ? `0${n}` : `${n}`;
+
+    function showFinal(span: HTMLElement) {
+      span.textContent = fmt(parseInt(span.dataset.workIndex!, 10));
+    }
+
+    function runCounter(span: HTMLElement) {
+      const target = parseInt(span.dataset.workIndex!, 10);
+      let current = 0;
+      const tick = setInterval(() => {
+        current++;
+        span.textContent = fmt(current);
+        if (current >= target) clearInterval(tick);
+      }, 35);
+    }
+
+    // Reduced motion: show final values immediately, skip animation
+    if (prefersReducedMotion) {
+      spans.forEach(showFinal);
+      return;
+    }
+
+    // IntersectionObserver not available: show final values
+    if (!('IntersectionObserver' in window)) {
+      spans.forEach(showFinal);
+      return;
+    }
+
+    let remaining = spans.length;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          runCounter(entry.target as HTMLElement);
+          if (--remaining === 0) observer.disconnect();
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    spans.forEach((span) => observer.observe(span));
+  })();
+</script>

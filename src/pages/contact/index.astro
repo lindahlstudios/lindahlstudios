@@ -14,7 +14,7 @@ const description = 'Get in touch about your Shopify project. Custom development
     <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-24">
       <div class="max-w-xl">
         <h1
-          class="font-serif text-4xl md:text-[44px] leading-[1.1] mb-6"
+          class="font-serif text-[40px] md:text-[56px] leading-[1.06] mb-6"
           data-sal="fade-up"
           data-sal-duration="500"
         >
@@ -22,7 +22,7 @@ const description = 'Get in touch about your Shopify project. Custom development
         </h1>
 
         <p
-          class="text-[17px] leading-[1.78] text-gray-600 mb-10"
+          class="text-[17px] leading-[1.78] text-ui-body mb-10"
           data-sal="fade-up"
           data-sal-duration="500"
           data-sal-delay="100"
@@ -66,12 +66,14 @@ const description = 'Get in touch about your Shopify project. Custom development
                 id="name"
                 name="name"
                 required
+                aria-required="true"
+                aria-describedby="name-error"
                 x-model="name"
-                :class="errors.name ? 'border-red-500' : 'border-gray-300'"
-                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+                :class="errors.name ? 'border-error' : 'border-ui-border-md'"
+                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
                 placeholder="Your name"
               />
-              <p x-show="errors.name" x-text="errors.name" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
+              <p id="name-error" x-show="errors.name" x-text="errors.name" class="text-error text-xs mt-1.5" role="alert" style="display:none"></p>
             </div>
 
             <div>
@@ -83,40 +85,51 @@ const description = 'Get in touch about your Shopify project. Custom development
                 id="email"
                 name="email"
                 required
+                aria-required="true"
+                aria-describedby="email-error"
                 x-model="email"
-                :class="errors.email ? 'border-red-500' : 'border-gray-300'"
-                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+                :class="errors.email ? 'border-error' : 'border-ui-border-md'"
+                class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
                 placeholder="you@company.com"
               />
-              <p x-show="errors.email" x-text="errors.email" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
+              <p id="email-error" x-show="errors.email" x-text="errors.email" class="text-error text-xs mt-1.5" role="alert" style="display:none"></p>
             </div>
           </div>
 
           <!-- Project Type -->
           <div>
-            <label class="block text-sm font-medium text-charcoal mb-2">Project Type</label>
-            <div class="grid grid-cols-3 gap-3">
+            <p id="project-type-label" class="block text-sm font-medium text-charcoal mb-2">Project Type</p>
+            <div role="radiogroup" aria-labelledby="project-type-label" class="grid grid-cols-1 sm:grid-cols-3 gap-3" @keydown="handleRadioKey($event, $el)">
               <button
                 type="button"
+                role="radio"
+                :aria-checked="projectType === 'one-off'"
+                :tabindex="!projectType || projectType === 'one-off' ? 0 : -1"
                 @click="projectType = 'one-off'; scope = ''"
-                :class="projectType === 'one-off' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                :class="projectType === 'one-off' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 One-off project
               </button>
               <button
                 type="button"
+                role="radio"
+                :aria-checked="projectType === 'retainer'"
+                :tabindex="projectType === 'retainer' ? 0 : -1"
                 @click="projectType = 'retainer'; scope = ''"
-                :class="projectType === 'retainer' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                :class="projectType === 'retainer' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Ongoing retainer
               </button>
               <button
                 type="button"
+                role="radio"
+                :aria-checked="projectType === 'other'"
+                :tabindex="projectType === 'other' ? 0 : -1"
                 @click="projectType = 'other'; scope = ''"
-                :class="projectType === 'other' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                :class="projectType === 'other' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Other
               </button>
@@ -125,21 +138,27 @@ const description = 'Get in touch about your Shopify project. Custom development
 
           <!-- Scope (one-off only) -->
           <div x-show="projectType === 'one-off'" x-transition style="display:none">
-            <label class="block text-sm font-medium text-charcoal mb-2">Scope</label>
-            <div class="grid grid-cols-2 gap-3">
+            <p id="scope-label" class="block text-sm font-medium text-charcoal mb-2">Scope</p>
+            <div role="radiogroup" aria-labelledby="scope-label" class="grid grid-cols-1 sm:grid-cols-2 gap-3" @keydown="handleRadioKey($event, $el)">
               <button
                 type="button"
+                role="radio"
+                :aria-checked="scope === 'fresh-build'"
+                :tabindex="!scope || scope === 'fresh-build' ? 0 : -1"
                 @click="scope = 'fresh-build'"
-                :class="scope === 'fresh-build' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                :class="scope === 'fresh-build' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Fresh build
               </button>
               <button
                 type="button"
+                role="radio"
+                :aria-checked="scope === 'maintenance'"
+                :tabindex="scope === 'maintenance' ? 0 : -1"
                 @click="scope = 'maintenance'"
-                :class="scope === 'maintenance' ? 'border-forest bg-forest text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'"
-                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left"
+                :class="scope === 'maintenance' ? 'border-forest bg-forest text-white' : 'border-ui-border bg-white text-ui-body hover:border-ui-border-md'"
+                class="px-4 py-3 rounded-lg border text-sm font-medium transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-1"
               >
                 Maintenance & improvements
               </button>
@@ -147,20 +166,20 @@ const description = 'Get in touch about your Shopify project. Custom development
             <p
               x-show="scope"
               x-text="scope === 'fresh-build' ? 'Fresh builds start at $5,000.' : 'Maintenance projects start at $1,000.'"
-              class="text-xs text-gray-400 mt-2"
+              class="text-xs text-ui-muted mt-2"
               style="display:none"
             ></p>
           </div>
 
           <div>
             <label for="shopify-url" class="block text-sm font-medium text-charcoal mb-2">
-              Shopify Store URL <span class="text-gray-400 font-normal">(if applicable)</span>
+              Shopify Store URL <span class="text-ui-muted font-normal">(if applicable)</span>
             </label>
             <input
               type="url"
               id="shopify-url"
               name="shopify_url"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
               placeholder="https://yourstore.myshopify.com"
             />
           </div>
@@ -172,7 +191,7 @@ const description = 'Get in touch about your Shopify project. Custom development
             <select
               id="budget"
               name="budget"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-charcoal text-sm focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
             >
               <option value="" disabled selected>Select a range</option>
               <option value="under-5k">Under $5,000</option>
@@ -186,12 +205,12 @@ const description = 'Get in touch about your Shopify project. Custom development
 
           <div>
             <label for="timeframe" class="block text-sm font-medium text-charcoal mb-2">
-              Target Timeframe <span class="text-gray-400 font-normal">(optional)</span>
+              Target Timeframe <span class="text-ui-muted font-normal">(optional)</span>
             </label>
             <select
               id="timeframe"
               name="timeframe"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-charcoal text-sm focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 rounded-lg border border-ui-border-md bg-white text-charcoal text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors"
             >
               <option value="" selected>Not sure yet</option>
               <option value="asap">ASAP</option>
@@ -210,19 +229,21 @@ const description = 'Get in touch about your Shopify project. Custom development
               name="message"
               rows="5"
               required
+              aria-required="true"
+              aria-describedby="message-error"
               x-model="message"
-              :class="errors.message ? 'border-red-500' : 'border-gray-300'"
-              class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors resize-y"
-              placeholder="Tell me about your project — what you're looking to build, goals, timeline, etc."
+              :class="errors.message ? 'border-error' : 'border-ui-border-md'"
+              class="w-full px-4 py-3 rounded-lg border bg-white text-charcoal text-sm placeholder:text-ui-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/20 focus-visible:border-forest transition-colors resize-y"
+              placeholder="Tell me about your project: what you're looking to build, goals, timeline, etc."
             ></textarea>
-            <p x-show="errors.message" x-text="errors.message" class="text-red-600 text-xs mt-1.5" role="alert" style="display:none"></p>
+            <p id="message-error" x-show="errors.message" x-text="errors.message" class="text-error text-xs mt-1.5" role="alert" style="display:none"></p>
           </div>
 
           <button
             type="submit"
-            class="inline-block px-8 py-3.5 bg-forest text-white rounded-lg text-[15px] font-semibold hover:bg-forest-light transition-colors"
+            class="group inline-block px-8 py-3.5 bg-forest text-white rounded-lg text-[15px] font-semibold hover:bg-forest-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
           >
-            Send Message →
+            Send Message <span class="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
           </button>
         </form>
       </div>
@@ -262,11 +283,28 @@ const description = 'Get in touch about your Shopify project. Custom development
       return Object.keys(this.errors).length === 0;
     },
 
+    handleRadioKey(event: KeyboardEvent, container: HTMLElement) {
+      const radios = Array.from(container.querySelectorAll<HTMLElement>('[role="radio"]'));
+      const idx = radios.indexOf(document.activeElement as HTMLElement);
+      if (idx === -1) return;
+      let next = -1;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        next = (idx + 1) % radios.length;
+      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        next = (idx - 1 + radios.length) % radios.length;
+      }
+      if (next !== -1) {
+        radios[next].click();
+        radios[next].focus();
+      }
+    },
+
     submit() {
       if (this.validate()) {
         (this.$el as HTMLFormElement).submit();
       } else {
-        // Scroll first error into view on mobile
         this.$nextTick(() => {
           this.$el.querySelector('[role="alert"]')
             ?.previousElementSibling

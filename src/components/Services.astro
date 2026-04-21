@@ -2,7 +2,7 @@
 const services = [
   {
     title: 'Custom Theme Development',
-    body: 'Full builds and redesigns on Shopify and Shopify Plus. Clean, performant Liquid code built to last and easy to maintain long after launch.',
+    lead: 'Performant, maintainable Shopify builds: clean Liquid code that lasts long after launch.',
     startingAt: '$5,000',
     startingAtNote: 'for a simple 5-page build with design in hand.',
     pricingNotes: [
@@ -11,81 +11,129 @@ const services = [
   },
   {
     title: 'CRO-Focused UI/UX',
-    body: "Conversion-focused UX improvements worked in Figma and in code — improving and extending your existing brand rather than rebuilding from scratch. From page-level redesigns to component-level CRO, backed by more than a decade of UI/UX experience and an operator's eye for what actually moves customers to buy.",
+    lead: 'Conversion improvements that extend your brand, not rebuild it from scratch.',
+    body: "From component-level CRO to full page redesigns, worked in Figma and in code, backed by a decade of UI/UX experience and an operator's eye for what actually moves customers to buy.",
   },
   {
     title: 'Ecommerce Strategy & Consulting',
-    body: "Strategy backed by real skin in the game: we've grown our own bootstrapped brand from $0 to six figures on Shopify. High-level thinking on your architecture, app stack, and growth levers — thinking in contribution margin and CAC payback, not just top-line revenue. Not just what to build, but what to build first and why it matters for your bottom line.",
+    lead: 'Strategy from a team with real skin in the game: contribution margin thinking, not just top-line revenue.',
+    body: "High-level guidance on your architecture, app stack, and growth levers. Focused on what to build first and why it matters for your bottom line.",
   },
   {
     title: 'Ongoing Retainers',
-    body: 'We do our best work with brands we know deeply. Retainer partnerships let us stay embedded in your business and ship improvements continuously.',
+    lead: 'Our best work happens with brands we know deeply.',
+    body: 'Retainer partnerships keep us embedded in your business so we can ship improvements continuously.',
     startingAt: '$2,000',
     badge: '2/3 spots filled',
+    badgeWarm: true,
   },
   {
     title: 'AI for Your Business',
-    body: "AI isn't just how we build — it's something we bring directly into your business. Whether that means teaching your team to work faster with AI tools, building custom Claude skills and plugins that automate your workflows, or adding AI-native features to your store, we help you get real leverage from it. Platform-agnostic: we lead with Claude but work with whatever fits your stack. Faster development timelines come with the territory — this studio's own site was built entirely with AI-assisted tools.",
+    lead: 'Real AI leverage for your business, not just faster code on our end.',
+    body: "Custom automations, AI-native store features, and team training on the tools that actually save time. Platform-agnostic: we lead with Claude but work with whatever fits your stack.",
     badge: 'New',
-    wide: true,
   },
 ];
 ---
 
 <section id="services" class="bg-white">
-  <div class="max-w-site mx-auto px-6 md:px-12 py-16 md:py-20">
-    <h2
-      class="font-serif text-3xl md:text-4xl mb-2"
+  <div class="max-w-site mx-auto px-6 md:px-12 py-20 md:py-28">
+
+    <p
+      class="text-[11px] font-semibold text-forest tracking-[0.12em] uppercase mb-3"
       data-sal="fade-up"
       data-sal-duration="500"
+    >
+      Services
+    </p>
+    <h2
+      class="font-serif text-[30px] md:text-[52px] leading-[1.1] mb-2"
+      data-sal="fade-up"
+      data-sal-duration="500"
+      data-sal-delay="80"
     >
       What we do
     </h2>
     <p
-      class="text-[15px] text-gray-400 mb-10"
+      class="text-[13px] text-ui-muted mb-12"
       data-sal="fade-up"
       data-sal-duration="500"
       data-sal-delay="100"
     >
-      Not everything — just the things we're great at.
+      Not everything. Just the things we're great at.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <!-- Editorial service list — numbered rows with hairline separators -->
+    <div class="border-b border-forest/[0.15]">
       {services.map((service, i) => (
         <div
-          class:list={[
-            'border border-gray-200 border-t-2 border-t-forest rounded-xl p-7 bg-white relative overflow-hidden',
-            service.wide && 'md:col-span-2',
-          ]}
+          class="border-t border-forest/[0.15] group -mx-6 md:-mx-12 px-6 md:px-12 py-10 md:py-12 hover:bg-forest-pale/40 transition-colors duration-200"
           data-sal="fade-up"
           data-sal-duration="500"
-          data-sal-delay={String(i * 100)}
+          data-sal-delay={String(100 + i * 80)}
         >
-          {service.badge && (
-            <div class="mb-3">
-              <span class="inline-flex items-center gap-1.5 text-xs font-semibold bg-forest-pale text-forest border border-forest/20 rounded-full px-3 py-1">
-                {service.badge}
+          <div class="flex gap-6 md:gap-10 items-start">
+
+            <!-- Index number -->
+            <div class="w-6 md:w-8 flex-shrink-0 pt-2">
+              <span class="text-[11px] font-semibold tracking-[0.14em] uppercase text-forest/40 group-hover:text-forest transition-colors duration-200">
+                0{i + 1}
               </span>
             </div>
-          )}
-          <h3 class="text-base font-bold mb-2">{service.title}</h3>
-          <p class="text-sm leading-relaxed text-gray-600">{service.body}</p>
-          {service.startingAt && (
-            <div class="mt-3">
-              <p class="text-sm font-medium text-forest">
-                Starting at {service.startingAt}{service.startingAtNote && <span class="font-normal text-gray-400"> — {service.startingAtNote}</span>}
-              </p>
-              {service.pricingNotes && (
-                <div class="mt-1 space-y-1">
-                  {service.pricingNotes.map(note => (
-                    <p class="text-xs text-gray-400">{note}</p>
-                  ))}
+
+            <!-- Content -->
+            <div class="flex-1 min-w-0">
+
+              <!-- Title row: service name + badge/price (right-aligned) -->
+              <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 mb-4">
+                <h3 class="font-serif text-[22px] md:text-[34px] leading-[1.08] tracking-[-0.025em] group-hover:text-forest transition-colors duration-200">
+                  {service.title}
+                </h3>
+
+                <!-- Meta: badge + starting price -->
+                <div class="flex flex-wrap items-center gap-3 flex-shrink-0">
+                  {service.badge && (
+                    <span class={`inline-flex items-center text-[10px] font-semibold rounded-full px-3 py-1 tracking-[0.06em] uppercase ${service.badgeWarm ? 'bg-cream text-charcoal/60 border border-charcoal/[0.12]' : 'bg-forest-pale text-forest border border-forest/20'}`}>
+                      {service.badge}
+                    </span>
+                  )}
+                  {service.startingAt && (
+                    <span class="text-[13px] font-medium text-forest whitespace-nowrap">
+                      From {service.startingAt}
+                    </span>
+                  )}
                 </div>
+              </div>
+
+              <!-- Body text -->
+              <div class="max-w-[600px]">
+                {service.lead && (
+                  <p class="text-[14px] leading-[1.78] font-semibold text-charcoal mb-1">
+                    {service.lead}
+                  </p>
+                )}
+                {service.body && (
+                  <p class="text-[14px] leading-[1.78] text-ui-body">
+                    {service.body}
+                  </p>
+                )}
+              </div>
+
+              <!-- Pricing footnote -->
+              {service.startingAtNote && (
+                <p class="text-[12px] text-ui-muted mt-2">
+                  {service.startingAtNote}
+                  {service.pricingNotes && service.pricingNotes.map(note => (
+                    <span> {note}</span>
+                  ))}
+                </p>
               )}
+
             </div>
-          )}
+          </div>
         </div>
       ))}
     </div>
+
   </div>
 </section>
