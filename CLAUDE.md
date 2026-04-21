@@ -49,6 +49,8 @@ This is a 1-person project. Loosely follow git flow:
 
 **ARIA radiogroup keyboard contract** — `role="radiogroup"` + `role="radio"` on buttons requires the full ARIA radio interaction pattern: roving tabindex (one `tabindex="0"`, rest `tabindex="-1"`) and arrow-key navigation (Left/Up = previous, Right/Down = next, wrapping). Without it, screen-reader users hear radio semantics but get button behavior. Either use native `<input type="radio">` or implement `handleRadioKey` + `:tabindex` bindings.
 
+**Run `/simplify` before pushing for PR review** — Always run `/simplify` on the changed files before pushing a branch up for PR review. It catches duplicate logic, redundant state, stale comments, and efficiency issues before they show up in bot review findings.
+
 ## Key Files
 
 - `src/components/` — all page sections as Astro components

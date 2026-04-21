@@ -305,7 +305,6 @@ const description = 'Get in touch about your Shopify project. Custom development
       if (this.validate()) {
         (this.$el as HTMLFormElement).submit();
       } else {
-        // Scroll first error into view on mobile
         this.$nextTick(() => {
           this.$el.querySelector('[role="alert"]')
             ?.previousElementSibling

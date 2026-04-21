@@ -253,9 +253,10 @@ const projects = [
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const spans = document.querySelectorAll<HTMLElement>('[data-work-index]');
 
+    const fmt = (n: number) => n < 10 ? `0${n}` : `${n}`;
+
     function showFinal(span: HTMLElement) {
-      const t = parseInt(span.dataset.workIndex!, 10);
-      span.textContent = t < 10 ? `0${t}` : `${t}`;
+      span.textContent = fmt(parseInt(span.dataset.workIndex!, 10));
     }
 
     function runCounter(span: HTMLElement) {
@@ -263,7 +264,7 @@ const projects = [
       let current = 0;
       const tick = setInterval(() => {
         current++;
-        span.textContent = current < 10 ? `0${current}` : `${current}`;
+        span.textContent = fmt(current);
         if (current >= target) clearInterval(tick);
       }, 35);
     }
@@ -280,12 +281,14 @@ const projects = [
       return;
     }
 
+    let remaining = spans.length;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           observer.unobserve(entry.target);
           runCounter(entry.target as HTMLElement);
+          if (--remaining === 0) observer.disconnect();
         });
       },
       { threshold: 0.2 }
