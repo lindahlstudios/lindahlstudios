@@ -1,18 +1,12 @@
 ---
 const featured = {
   quote:
-    'Not only did he have the technical chops to make the developer changes required, David also suggested and implemented his own UX improvements. We\'ll definitely look to partner with David again in the future.',
+    'Really enjoyed working with David to implement recommendations from an Oddit report to enhance our UX and site functionality. David set up a project timeline via Basecamp which made the workflow move really efficiently. His communication and updates were timely and organized. Not only did he have the technical chops to make the developer changes required, David also suggested and implemented his own UX improvements.',
   name: 'Curtis Ulrich',
   title: 'Director of eCommerce, Aviator Nation',
 };
 
 const secondary = [
-  {
-    quote:
-      "I really enjoyed working with David. I came to him with basically a couple screenshots and an idea in my head and he turned it into working Liquid in about 4 days flat. He's a great communicator and a pleasure to work with.",
-    name: 'Kaine Kornegay',
-    title: 'Co-Founder, Revolution Fibers',
-  },
   {
     quote:
       "I'm really impressed with the work David did for us. He was incredibly detailed and communicative throughout the entire time we worked with him. What stood out most was his expertise — and he took the time to research and suggest strategies that would benefit us in the long run.",
@@ -21,15 +15,21 @@ const secondary = [
   },
   {
     quote:
-      "Working with David was an enjoyable and collaborative experience and the product he delivered met all of my expectations. To this day I continue to partner with David on projects. I 10/10 would recommend!",
-    name: 'Amanda P',
-    title: 'Art Director, good culture',
+      "One of the most impressive aspects of David's work was his ability to anticipate potential challenges and proactively address them. Working with David was a delight — his professionalism and dedication to high-quality results make him an invaluable asset to any project.",
+    name: 'Chris Lang',
+    title: 'Fresh Chile',
   },
   {
     quote:
-      "David demonstrated a deep understanding of our requirements and goals. His ability to anticipate potential challenges and proactively address them exceeded our expectations.",
-    name: 'Chris Lang',
-    title: 'Fresh Chile',
+      "I really enjoyed working with David. I came to him with basically a couple screenshots and an idea in my head and he turned it into working Liquid in about 4 days flat. He's a great communicator and a pleasure to work with.",
+    name: 'Kaine Kornegay',
+    title: 'Co-Founder, Revolution Fibers',
+  },
+  {
+    quote:
+      "Working with David was an enjoyable and collaborative experience and the product he delivered met all of my expectations. To this day I continue to partner with David on projects. I 10/10 would recommend!",
+    name: 'Amanda P',
+    title: 'Art Director, good culture',
   },
 ];
 ---
@@ -59,19 +59,21 @@ const secondary = [
       data-sal="fade-up"
       data-sal-duration="500"
     >
-      <!-- Decorative opening quote mark — typographic accent, not read aloud -->
-      <div
-        class="font-serif text-[40px] md:text-[72px] leading-none text-forest/30 mb-2 select-none"
-        aria-hidden="true"
-      >&ldquo;</div>
+      <div class="max-w-[800px]">
+        <!-- Decorative opening quote mark — typographic accent, not read aloud -->
+        <div
+          class="font-serif text-[40px] md:text-[72px] leading-none text-forest/30 mb-4 select-none"
+          aria-hidden="true"
+        >&ldquo;</div>
 
-      <blockquote class="font-serif text-[20px] md:text-[26px] leading-[1.65] text-charcoal mb-6 max-w-[660px]">
-        {featured.quote}
-      </blockquote>
+        <blockquote class="font-serif text-[20px] md:text-[26px] leading-[1.65] tracking-[-0.02em] text-charcoal mb-6">
+          {featured.quote}
+        </blockquote>
 
-      <cite class="text-sm not-italic text-ui-muted">
-        <strong class="text-charcoal font-semibold">{featured.name}</strong>,{' '}{featured.title}
-      </cite>
+        <cite class="text-sm not-italic text-ui-muted">
+          <strong class="text-charcoal font-semibold">{featured.name}</strong>,{' '}{featured.title}
+        </cite>
+      </div>
     </div>
 
     <!-- Secondary testimonials -->
