@@ -47,7 +47,7 @@ const navLinks = [
   <!-- Mobile menu — animated via grid-rows trick (no height: auto limitation).
        Two-level structure is required: grid item must have min-h-0 and NO padding,
        otherwise the padding prevents the track from collapsing to 0fr. -->
-  <div id="mobile-menu" class="md:hidden border-t border-ui-border bg-white grid transition-[grid-template-rows] duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] grid-rows-[0fr] overflow-hidden" aria-hidden="true">
+  <div id="mobile-menu" class="md:hidden border-t border-ui-border bg-white grid transition-[grid-template-rows] duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] grid-rows-[0fr] overflow-hidden" aria-hidden="true" inert>
     <div class="min-h-0">
     <div class="px-6 py-6 space-y-4">
       {navLinks.map((link) => (
@@ -76,6 +76,7 @@ const navLinks = [
 
   function openMenu() {
     menu?.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+    menu?.removeAttribute('inert');
     menu?.setAttribute('aria-hidden', 'false');
     btn?.setAttribute('aria-expanded', 'true');
     icon?.setAttribute('d', 'M6 18L18 6M6 6l12 12');
@@ -83,6 +84,7 @@ const navLinks = [
 
   function closeMenu() {
     menu?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+    menu?.setAttribute('inert', '');
     menu?.setAttribute('aria-hidden', 'true');
     btn?.setAttribute('aria-expanded', 'false');
     icon?.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
