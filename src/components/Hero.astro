@@ -1,9 +1,3 @@
----
-const now = new Date();
-const bookingDate = new Date(now.getFullYear(), now.getMonth() + 2, 1);
-const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
----
-
 <section id="hero" class="bg-cream relative">
   <div class="relative z-10 max-w-site mx-auto px-6 md:px-12 pt-14 pb-24 md:py-40">
     <div
@@ -11,9 +5,12 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
       data-sal="fade-up"
       data-sal-duration="500"
     >
-      <span class="inline-flex items-center gap-2 bg-forest-pale text-forest text-[12px] font-semibold tracking-wide px-3.5 py-1.5 rounded-full border border-forest/20">
+      <span
+        class="inline-flex items-center gap-2 bg-forest-pale text-forest text-[12px] font-semibold tracking-wide px-3.5 py-1.5 rounded-full border border-forest/20"
+        x-data="bookingBadge"
+      >
         <span class="w-1.5 h-1.5 rounded-full bg-forest inline-block flex-shrink-0"></span>
-        Now Booking {bookingMonth}
+        <span x-text="label">Now Booking</span>
       </span>
     </div>
 
@@ -113,6 +110,25 @@ const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 
     z-index: 1;
   }
 </style>
+
+<script>
+  import Alpine from 'alpinejs';
+
+  // Two months out, computed in the browser so a stale Netlify build
+  // cannot leave "Now Booking" pointing at a month that has already passed.
+  Alpine.data('bookingBadge', () => {
+    const now = new Date();
+    const bookingDate = new Date(now.getFullYear(), now.getMonth() + 2, 1);
+    const bookingMonth = bookingDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+    return {
+      label: `Now Booking ${bookingMonth}`,
+    };
+  });
+
+  window.Alpine = Alpine;
+  Alpine.start();
+</script>
 
 <script>
   // Cinematic word-reveal entrance for the hero h1.
